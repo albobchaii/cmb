@@ -1,0 +1,398 @@
+import { useEffect, useState } from 'react'
+import {
+  company, nav, hero, stats, about, featuresIntro, features, productsIntro, products,
+  brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
+} from '../data/content'
+import { Icon, ProductArt } from './Art'
+
+function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
+  return (
+    <a className={`btn btn-shop btn-${variant}`} href={company.shopee} target="_blank" rel="noreferrer">
+      <Icon name="bag" />
+      <span>{children}</span>
+    </a>
+  )
+}
+
+const delay = (i) => ({ '--d': i })
+
+function SectionLabel({ index, children }) {
+  return <p className="label"><span>{index}</span>{children}</p>
+}
+
+export function Header() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
+      <div className="container header-inner">
+        <a href="#top" className="logo" onClick={() => setOpen(false)}>
+          <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="90" height="42" />
+          <span className="logo-text">Chandra Maju Bersama</span>
+        </a>
+        <nav className={`nav ${open ? 'is-open' : ''}`}>
+          {nav.map((item) => (
+            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
+          ))}
+          <ShopButton variant="small">Belanja</ShopButton>
+        </nav>
+        <button className={`menu-toggle ${open ? 'is-open' : ''}`} aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
+          <span /><span />
+        </button>
+      </div>
+    </header>
+  )
+}
+
+export function Hero() {
+  return (
+    <section className="hero" id="top">
+      <div className="container">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <h1 className="reveal" style={delay(0)}>{hero.title} <em>{hero.accent}</em></h1>
+            <p className="lead reveal" style={delay(1)}>{hero.lead}</p>
+            <div className="actions reveal" style={delay(2)}>
+              <ShopButton />
+              <a className="btn btn-ghost" href="#produk">Lihat produk</a>
+            </div>
+            <ul className="hero-points reveal" style={delay(3)}>
+              {hero.points.map((p) => <li key={p}>{p}</li>)}
+            </ul>
+          </div>
+          <div className="hero-visual reveal reveal-scale" style={delay(2)}>
+            <div className="hero-card hero-card-main"><ProductArt kind="box" /></div>
+            <div className="hero-card hero-card-roll"><ProductArt kind="roll" /></div>
+            <div className="hero-card hero-card-pack"><ProductArt kind="pack" /></div>
+            <div className="hero-badge hero-badge-top">
+              <span className="hero-badge-icon"><Icon name="shield" /></span>
+              <div><strong>Higienis</strong><span>Dikemas rapi &amp; aman</span></div>
+            </div>
+            <div className="hero-badge hero-badge-bottom">
+              <span className="hero-badge-icon"><Icon name="truck" /></span>
+              <div><strong>Siap kirim</strong><span>Ke seluruh Indonesia</span></div>
+            </div>
+          </div>
+        </div>
+        <dl className="facts">
+          {stats.map((s, i) => (
+            <div key={s.label} className="reveal" style={delay(i)}>
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )
+}
+
+export function About() {
+  return (
+    <section className="section about" id="tentang">
+      <div className="container">
+        <div className="two-col about-intro">
+          <div className="reveal">
+            <SectionLabel index="01">Tentang kami</SectionLabel>
+            <h2>{about.title}</h2>
+          </div>
+          <p className="about-lead reveal" style={delay(1)}>{about.lead}</p>
+        </div>
+
+        <div className="about-story">
+          <aside className="about-card reveal reveal-scale">
+            <img src="/brand/cmb-logo.svg" alt="Logo CMB" width="180" height="84" />
+            <dl>
+              <div><dt>Nama perusahaan</dt><dd>{company.name}</dd></div>
+              <div><dt>Berdiri</dt><dd>{company.founded}</dd></div>
+              <div><dt>Bidang usaha</dt><dd>Kertas &amp; produk tissue</dd></div>
+              <div><dt>Lokasi</dt><dd>Cipondoh, Kota Tangerang</dd></div>
+            </dl>
+          </aside>
+          <div className="prose">
+            {about.story.map((text, i) => (
+              <p key={i} className="reveal" style={delay(i + 1)}>{text}</p>
+            ))}
+            <div className="audiences reveal" style={delay(4)}>
+              <span className="audiences-label">Kami melayani</span>
+              <ul>
+                {about.audiences.map((a) => <li key={a}>{a}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="vm">
+          <div className="vm-card vm-vision reveal">
+            <span className="vm-icon"><Icon name="eye" /></span>
+            <h3>Visi</h3>
+            <p>{about.vision}</p>
+          </div>
+          <div className="vm-card reveal" style={delay(1)}>
+            <span className="vm-icon"><Icon name="target" /></span>
+            <h3>Misi</h3>
+            <ol>
+              {about.mission.map((m) => <li key={m}>{m}</li>)}
+            </ol>
+          </div>
+        </div>
+
+        <div className="values">
+          {about.values.map((v, i) => (
+            <div key={v.title} className="value reveal" style={delay(i)}>
+              <span className="value-num">{String(i + 1).padStart(2, '0')}</span>
+              <Icon name={v.icon} />
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Features() {
+  return (
+    <section className="section section-alt" id="keunggulan">
+      <div className="container">
+        <div className="section-head reveal">
+          <SectionLabel index="02">Keunggulan</SectionLabel>
+          <h2>{featuresIntro.title}</h2>
+          <p>{featuresIntro.text}</p>
+        </div>
+        <div className="features">
+          {features.map((f, i) => (
+            <div key={f.title} className="feature reveal" style={delay(i % 3)}>
+              <span className="feature-icon"><Icon name={f.icon} /></span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Products() {
+  return (
+    <section className="section" id="produk">
+      <div className="container">
+        <div className="section-head split-head reveal">
+          <div>
+            <SectionLabel index="03">Produk</SectionLabel>
+            <h2>{productsIntro.title}</h2>
+            <p>{productsIntro.text}</p>
+          </div>
+          <a className="text-link" href={company.shopee} target="_blank" rel="noreferrer">Lihat katalog lengkap →</a>
+        </div>
+        <div className="products">
+          {products.map((p, i) => (
+            <a key={p.name} className="product reveal" style={delay(i % 3)} href={company.shopee} target="_blank" rel="noreferrer">
+              <div className="product-media">
+                <span className="product-meta">{p.variant}</span>
+                <ProductArt kind={p.kind} />
+              </div>
+              <div className="product-info">
+                <p className="product-tagline">{p.tagline}</p>
+                <h3>{p.name}</h3>
+                <p>{p.text}</p>
+                <ul className="product-uses">
+                  {p.uses.map((u) => <li key={u}>{u}</li>)}
+                </ul>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className="products-note reveal">
+          <p><strong>Tidak menemukan produk yang Anda cari?</strong> Kami juga menerima permintaan khusus untuk kebutuhan usaha.</p>
+          <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan via WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Brands() {
+  return (
+    <section className="section brands-section" id="brand">
+      <div className="container">
+        <div className="section-head reveal">
+          <SectionLabel index="04">Brand</SectionLabel>
+          <h2>{brandsIntro.title}</h2>
+          <p>{brandsIntro.text}</p>
+        </div>
+        <div className="brands-marquee reveal">
+          <div className="brands-track">
+            {[...brands, ...brands].map((b, i) => (
+              <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
+                {b.logo
+                  ? <img className={b.mono ? 'is-mono' : b.light ? 'is-light' : undefined} src={b.logo} alt={b.name} loading="lazy" />
+                  : <span className="brand-name">{b.name}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="brands-foot reveal">
+          <p>Mencari merek lain? <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
+          <small>Nama dan logo merek adalah milik pemiliknya masing-masing.</small>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function HowToOrder() {
+  return (
+    <section className="section section-alt" id="cara-belanja">
+      <div className="container">
+        <div className="section-head reveal">
+          <SectionLabel index="05">Cara belanja</SectionLabel>
+          <h2>{orderIntro.title}</h2>
+          <p>{orderIntro.text}</p>
+        </div>
+        <div className="channels">
+          {channels.map((c, i) => (
+            <div key={c.key} className={`channel channel-${c.key} reveal`} style={delay(i)}>
+              <div className="channel-head">
+                <span className="channel-icon"><Icon name={c.icon} /></span>
+                <span className="channel-badge">{c.badge}</span>
+              </div>
+              <h3>{c.title}</h3>
+              <ol className="channel-steps">
+                {c.steps.map((s) => (
+                  <li key={s.title}>
+                    <strong>{s.title}</strong>
+                    <span>{s.text}</span>
+                  </li>
+                ))}
+              </ol>
+              {c.key === 'online'
+                ? <ShopButton />
+                : <a className="btn btn-ghost" href={company.directions} target="_blank" rel="noreferrer"><Icon name="pin" /> Petunjuk arah ke toko</a>}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Location() {
+  const embed = `https://www.google.com/maps?q=${encodeURIComponent(company.mapsQuery)}&z=17&output=embed`
+  return (
+    <section className="section" id="lokasi">
+      <div className="container two-col">
+        <div className="reveal">
+          <SectionLabel index="06">Lokasi</SectionLabel>
+          <h2>{locationIntro.title}</h2>
+          <p className="section-text">{locationIntro.text}</p>
+          <dl className="info">
+            <div><dt>Alamat</dt><dd>{company.address}</dd></div>
+            <div><dt>Jam buka</dt><dd>{company.hours}</dd></div>
+            <div><dt>Telepon</dt><dd>{company.phone}</dd></div>
+            <div><dt>Email</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a></dd></div>
+          </dl>
+          <div className="actions">
+            <a className="btn btn-primary" href={company.directions} target="_blank" rel="noreferrer">Petunjuk arah</a>
+            <a className="btn btn-ghost" href={company.maps} target="_blank" rel="noreferrer">Buka di Google Maps</a>
+          </div>
+        </div>
+        <div className="map reveal reveal-scale" style={delay(1)}>
+          <iframe title="Lokasi CMB" src={embed} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Faq() {
+  return (
+    <section className="section section-alt" id="faq">
+      <div className="container two-col faq">
+        <div className="reveal faq-head">
+          <SectionLabel index="07">FAQ</SectionLabel>
+          <h2>{faqIntro.title}</h2>
+          <p className="section-text">{faqIntro.text}</p>
+          <a className="btn btn-ghost" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer"><Icon name="phone" /> Tanya via WhatsApp</a>
+        </div>
+        <div className="faq-list">
+          {faqs.map((f, i) => (
+            <details key={f.q} className="faq-item reveal" style={delay(i % 3)} open={i === 0}>
+              <summary>{f.q}<span className="faq-toggle" aria-hidden="true" /></summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function CallToAction() {
+  return (
+    <section className="cta-wrap">
+      <div className="container">
+        <div className="cta reveal reveal-scale">
+          <div>
+            <h2>{cta.title}</h2>
+            <p>{cta.text}</p>
+            <ul className="cta-perks">
+              {cta.perks.map((p) => <li key={p}>{p}</li>)}
+            </ul>
+          </div>
+          <div className="actions">
+            <a className="btn btn-light" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">
+              <Icon name="phone" /> Hubungi via WhatsApp
+            </a>
+            <ShopButton variant="outline-light" />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export function Footer() {
+  return (
+    <footer className="footer">
+      <div className="container footer-grid">
+        <div className="footer-brand">
+          <a href="#top" className="logo">
+            <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="90" height="42" />
+            <span className="logo-text">Chandra Maju Bersama</span>
+          </a>
+          <p>{footer.blurb}</p>
+        </div>
+        <div>
+          <h4>Navigasi</h4>
+          {nav.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+        </div>
+        <div>
+          <h4>Belanja</h4>
+          <a href={company.shopee} target="_blank" rel="noreferrer">Shopee</a>
+          <a href={company.maps} target="_blank" rel="noreferrer">Toko offline</a>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <span>{company.address}</span>
+          <span>{company.phone}</span>
+          <a href={`mailto:${company.email}`}>{company.email}</a>
+        </div>
+      </div>
+      <div className="container footer-bottom">
+        <span>© {new Date().getFullYear()} {company.name}</span>
+        <a href="#top">Kembali ke atas ↑</a>
+      </div>
+    </footer>
+  )
+}

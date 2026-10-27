@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1136 530" role="img" aria-label="CMB — CV. Chandra Maju Bersama">
+  <defs>
+    <linearGradient id="cmb-bg" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#d22a2d"/>
+      <stop offset="0.55" stop-color="#b0242a"/>
+      <stop offset="1" stop-color="#8e2025"/>
+    </linearGradient>
+    <mask id="cmb-c" maskUnits="userSpaceOnUse" x="0" y="0" width="1136" height="530">
+      <circle cx="300" cy="255" r="177" fill="#fff"/>
+      <circle cx="300" cy="255" r="98" fill="#000"/>
+      <path d="M320 220L363 177L893 707L850 750Z" fill="#000"/>
+    </mask>
+  </defs>
+  <rect width="1136" height="530" rx="96" fill="url(#cmb-bg)"/>
+  <g fill="#fff">
+    <rect width="1136" height="530" mask="url(#cmb-c)"/>
+    <path d="M332 148L425.2 129.8L550.5 255.5L495 311Z"/>
+    <path d="M617 78H689V117L495 311L439.5 255.5Z"/>
+    <rect x="610" y="78" width="79" height="346"/>
+    <path fill-rule="evenodd" d="M733 78H869A105 105 0 0 1 955.8 242A106 106 0 0 1 882 424H733Z M806 140V228H860A44 44 0 0 0 860 140Z M806 272V362H871A45 45 0 0 0 871 272Z"/>
+  </g>
+</svg>
