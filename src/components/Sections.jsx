@@ -56,31 +56,16 @@ export function Hero() {
   return (
     <section className="hero" id="top">
       <div className="container">
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <h1 className="reveal" style={delay(0)}>{hero.title} <em>{hero.accent}</em></h1>
-            <p className="lead reveal" style={delay(1)}>{hero.lead}</p>
-            <div className="actions reveal" style={delay(2)}>
-              <ShopButton />
-              <a className="btn btn-ghost" href="#produk">Lihat produk</a>
-            </div>
-            <ul className="hero-points reveal" style={delay(3)}>
-              {hero.points.map((p) => <li key={p}>{p}</li>)}
-            </ul>
+        <div className="hero-copy">
+          <h1 className="reveal" style={delay(0)}>{hero.title} <em>{hero.accent}</em></h1>
+          <p className="lead reveal" style={delay(1)}>{hero.lead}</p>
+          <div className="actions reveal" style={delay(2)}>
+            <ShopButton />
+            <a className="btn btn-ghost" href="#produk">Lihat produk</a>
           </div>
-          <div className="hero-visual reveal reveal-scale" style={delay(2)}>
-            <div className="hero-card hero-card-main"><ProductArt kind="box" /></div>
-            <div className="hero-card hero-card-roll"><ProductArt kind="roll" /></div>
-            <div className="hero-card hero-card-pack"><ProductArt kind="pack" /></div>
-            <div className="hero-badge hero-badge-top">
-              <span className="hero-badge-icon"><Icon name="shield" /></span>
-              <div><strong>Higienis</strong><span>Dikemas rapi &amp; aman</span></div>
-            </div>
-            <div className="hero-badge hero-badge-bottom">
-              <span className="hero-badge-icon"><Icon name="truck" /></span>
-              <div><strong>Siap kirim</strong><span>Ke seluruh Indonesia</span></div>
-            </div>
-          </div>
+          <ul className="hero-points reveal" style={delay(3)}>
+            {hero.points.map((p) => <li key={p}>{p}</li>)}
+          </ul>
         </div>
         <dl className="facts">
           {stats.map((s, i) => (
@@ -213,6 +198,7 @@ export function Products() {
             </a>
           ))}
         </div>
+        <p className="swipe-hint" aria-hidden="true">Geser untuk melihat produk lainnya</p>
         <div className="products-note reveal">
           <p><strong>Tidak menemukan produk yang Anda cari?</strong> Kami juga menerima permintaan khusus untuk kebutuhan usaha.</p>
           <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan via WhatsApp</a>
@@ -236,7 +222,7 @@ export function Brands() {
             {[...brands, ...brands].map((b, i) => (
               <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
                 {b.logo
-                  ? <img className={b.mono ? 'is-mono' : b.light ? 'is-light' : undefined} src={b.logo} alt={b.name} loading="lazy" />
+                  ? <img className={b.mono ? 'is-mono' : b.light ? 'is-light' : undefined} src={b.logo} alt={b.name} />
                   : <span className="brand-name">{b.name}</span>}
               </div>
             ))}
