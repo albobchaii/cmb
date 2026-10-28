@@ -85,7 +85,6 @@ export function Hero() {
 
   return (
     <section className="hero" id="top" style={{ '--hy': `${shift}px` }}>
-      <div className="hero-glow" aria-hidden="true" />
       <div className="hero-decor" aria-hidden="true">
         <span className="decor decor-1"><TissueSheet /></span>
         <span className="decor decor-2"><TissueSheet /></span>
