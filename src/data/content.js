@@ -87,7 +87,7 @@ export const brands = [
   { name: 'Clean Plus', logo: '/brands/cleanplus.png' },
   { name: 'See-U', logo: '/brands/seeu.png' },
   { name: 'Pulpies', logo: '/brands/pulpies.png' },
-  { name: 'Favour', logo: null },
+  { name: 'Favour', logo: '/brands/favour.png' },
   { name: 'Snowy', logo: null },
   { name: 'Yunikon', logo: '/brands/yunikon.png', light: true },
 ]
