@@ -54,11 +54,11 @@ export const productsIntro = {
   text: 'Dari kamar mandi sampai dapur, dari tas kerja sampai meja restoran — pilih tissue yang paling pas untuk Anda.',
 }
 
-// Foto produk untuk galeri showcase (simpan file di public/products/)
+// Foto produk (PNG latar transparan) untuk slideshow — simpan di public/products/
 export const showcase = [
-  { src: '/products/trecy-economy.jpg', alt: 'Trecy Economy Facial Tissue Embossed' },
-  { src: '/products/trecy-facial-1kg.jpg', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
-  { src: '/products/trecy-belah.jpg', alt: 'Trecy Facial Tissue Belah 2 Ply' },
+  { src: '/products/trecy-economy.png', alt: 'Trecy Economy Facial Tissue Embossed' },
+  { src: '/products/trecy-facial-1kg.png', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
+  { src: '/products/trecy-belah.png', alt: 'Trecy Facial Tissue Belah 2 Ply' },
 ]
 
 export const brandsIntro = {

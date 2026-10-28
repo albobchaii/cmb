@@ -197,6 +197,53 @@ export function Features() {
   )
 }
 
+function ProductSlider({ items }) {
+  const [index, setIndex] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const touch = useRef(null)
+  const go = (i) => setIndex((i + items.length) % items.length)
+
+  useEffect(() => {
+    if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = setInterval(() => setIndex((i) => (i + 1) % items.length), 4000)
+    return () => clearInterval(timer)
+  }, [paused, items.length])
+
+  return (
+    <div
+      className="slider reveal"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={(e) => { touch.current = e.touches[0].clientX; setPaused(true) }}
+      onTouchEnd={(e) => {
+        const dx = e.changedTouches[0].clientX - (touch.current ?? 0)
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1))
+        setPaused(false)
+      }}
+    >
+      <div className="slider-stage">
+        {items.map((p, i) => (
+          <img
+            key={p.src}
+            className={`slide ${i === index ? 'is-active' : ''}`}
+            src={p.src}
+            alt={p.alt}
+            aria-hidden={i !== index}
+          />
+        ))}
+        <div className="slider-shadow" aria-hidden="true" />
+      </div>
+      <button className="slider-arrow slider-prev" onClick={() => go(index - 1)} aria-label="Produk sebelumnya">‹</button>
+      <button className="slider-arrow slider-next" onClick={() => go(index + 1)} aria-label="Produk berikutnya">›</button>
+      <div className="slider-dots">
+        {items.map((p, i) => (
+          <button key={p.src} className={i === index ? 'is-active' : ''} onClick={() => go(i)} aria-label={`Tampilkan ${p.alt}`} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function Products() {
   return (
     <section className="section" id="produk">
@@ -209,13 +256,7 @@ export function Products() {
           </div>
           <a className="text-link" href={company.shopee} target="_blank" rel="noreferrer">Lihat katalog lengkap →</a>
         </div>
-        <div className="showcase">
-          {showcase.map((p, i) => (
-            <figure key={p.src} className="showcase-item reveal" style={delay(i)}>
-              <img src={p.src} alt={p.alt} width="1600" height="1200" loading="lazy" />
-            </figure>
-          ))}
-        </div>
+        <ProductSlider items={showcase} />
         <div className="products-note reveal">
           <p><strong>Tidak menemukan produk yang Anda cari?</strong> Kami juga menerima permintaan khusus untuk kebutuhan usaha.</p>
           <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan via WhatsApp</a>
