@@ -80,7 +80,7 @@ export const brands = [
   { name: 'Paseo', logo: '/brands/paseo.png', mono: true },
   { name: 'Nice', logo: '/brands/nice.png' },
   { name: 'Tessa', logo: '/brands/tessa.png' },
-  { name: 'Jolly', logo: null },
+  { name: 'Jolly', logo: '/brands/jolly.png' },
   { name: 'Livi', logo: '/brands/livi.png' },
   { name: 'Multi', logo: '/brands/multi.png' },
   { name: 'Montiss', logo: null },
