@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  company, nav, hero, about, featuresIntro, features, productsIntro, products,
+  company, nav, hero, about, featuresIntro, features, productsIntro, featured, products,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
 import { Icon, ProductArt, TissueSheet, TissueRollSide } from './Art'
@@ -209,6 +209,23 @@ export function Products() {
           </div>
           <a className="text-link" href={company.shopee} target="_blank" rel="noreferrer">Lihat katalog lengkap →</a>
         </div>
+        <article className="featured reveal">
+          <div className="featured-media">
+            <img src={featured.image} alt={`${featured.name} ${featured.subtitle}`} width="1600" height="1200" />
+          </div>
+          <div className="featured-info">
+            <span className="featured-label">{featured.label}</span>
+            <h3>{featured.name}</h3>
+            <p className="featured-sub">{featured.subtitle}</p>
+            <p>{featured.text}</p>
+            <dl className="featured-specs">
+              {featured.specs.map((s) => (
+                <div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>
+              ))}
+            </dl>
+            <ShopButton>Beli di Shopee</ShopButton>
+          </div>
+        </article>
         <div className="products">
           {products.map((p, i) => (
             <a key={p.name} className="product reveal" style={delay(i % 3)} href={company.shopee} target="_blank" rel="noreferrer">
