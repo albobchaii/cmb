@@ -78,14 +78,14 @@ export const brandsIntro = {
 // `mono: true` untuk logo berwarna putih, `light: true` untuk logo berwarna sangat terang.
 export const brands = [
   { name: 'Paseo', logo: '/brands/paseo.png', mono: true },
-  { name: 'Nice', logo: null },
+  { name: 'Nice', logo: '/brands/nice.png' },
   { name: 'Tessa', logo: '/brands/tessa.png' },
   { name: 'Jolly', logo: null },
   { name: 'Livi', logo: '/brands/livi.png' },
   { name: 'Multi', logo: '/brands/multi.png' },
   { name: 'Montiss', logo: null },
-  { name: 'Clean Plus', logo: null },
-  { name: 'See-U', logo: null },
+  { name: 'Clean Plus', logo: '/brands/cleanplus.png' },
+  { name: 'See-U', logo: '/brands/seeu.png' },
   { name: 'Pulpies', logo: '/brands/pulpies.png' },
   { name: 'Favour', logo: null },
   { name: 'Snowy', logo: null },
