@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  company, nav, hero, stats, about, featuresIntro, features, productsIntro, products,
+  company, nav, hero, about, featuresIntro, features, productsIntro, products,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
 import { Icon, ProductArt } from './Art'
@@ -67,14 +67,6 @@ export function Hero() {
             {hero.points.map((p) => <li key={p}>{p}</li>)}
           </ul>
         </div>
-        <dl className="facts">
-          {stats.map((s, i) => (
-            <div key={s.label} className="reveal" style={delay(i)}>
-              <dt>{s.label}</dt>
-              <dd>{s.value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   )

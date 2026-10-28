@@ -34,12 +34,6 @@ export const hero = {
   points: ['Lembut & tidak mudah sobek', 'Eceran & grosir', 'Toko offline & Shopee'],
 }
 
-export const stats = [
-  { value: '2021', label: 'Melayani sejak' },
-  { value: '6+', label: 'Kategori produk' },
-  { value: 'B2C & B2B', label: 'Eceran hingga grosir' },
-]
-
 export const featuresIntro = {
   title: 'Kualitas yang terasa di setiap lembar.',
   text: 'Tissue memang terlihat sederhana — sampai Anda memakai yang kualitasnya kurang baik. Karena itu kami memperhatikan hal-hal kecil yang membuat perbedaan besar.',
