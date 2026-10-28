@@ -29,7 +29,8 @@ export const nav = [
 
 export const hero = {
   title: 'Tissue berkualitas untuk',
-  accent: 'setiap hari.',
+  // kata berwarna di judul, bergantian otomatis
+  accents: ['setiap hari.', 'rumah Anda.', 'usaha Anda.', 'kantor Anda.'],
   lead: 'Dari meja makan hingga meja kantor, tissue CMB hadir lembut di kulit, kuat saat dipakai, dan tetap ramah di kantong. Tersedia eceran maupun grosir — langsung dari CV. Chandra Maju Bersama.',
   points: ['Lembut & tidak mudah sobek', 'Eceran & grosir', 'Toko offline & Shopee'],
 }

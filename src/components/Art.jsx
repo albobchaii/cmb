@@ -98,3 +98,30 @@ export function ProductArt({ kind, color = '#fbeaea' }) {
     </svg>
   )
 }
+
+// Dekorasi hero: lembar tissue dan gulungan tampak samping.
+export function TissueSheet() {
+  return (
+    <svg viewBox="0 0 160 160" aria-hidden="true">
+      <defs>
+        <pattern id="sheet-dots" width="10" height="10" patternUnits="userSpaceOnUse">
+          <circle cx="5" cy="5" r="1.1" fill="#e9d3d6" />
+        </pattern>
+      </defs>
+      <path d="M18 22 Q50 14 80 20 T142 18 Q148 50 142 80 T144 140 Q110 148 80 142 T16 144 Q10 110 16 80 T18 22Z" fill="#fff" stroke="#ecdcde" strokeWidth="1.5" />
+      <path d="M18 22 Q50 14 80 20 T142 18 Q148 50 142 80 T144 140 Q110 148 80 142 T16 144 Q10 110 16 80 T18 22Z" fill="url(#sheet-dots)" />
+      <path d="M22 82 Q80 76 140 82" fill="none" stroke="#ecdcde" strokeWidth="1.2" strokeDasharray="4 5" />
+    </svg>
+  )
+}
+
+export function TissueRollSide() {
+  return (
+    <svg viewBox="0 0 160 160" aria-hidden="true">
+      <circle cx="80" cy="80" r="62" fill="#fff" stroke="#ecdcde" strokeWidth="1.5" />
+      {[50, 38, 26].map((r) => <circle key={r} cx="80" cy="80" r={r} fill="none" stroke="#f1e3e5" strokeWidth="1.2" />)}
+      <circle cx="80" cy="80" r="16" fill="#fbeaea" stroke="#a3222a" strokeWidth="1.5" />
+      <path d="M142 80 Q150 120 128 150" fill="none" stroke="#ecdcde" strokeWidth="1.5" />
+    </svg>
+  )
+}

@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   company, nav, hero, about, featuresIntro, features, productsIntro, products,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, ProductArt } from './Art'
+import { Icon, ProductArt, TissueSheet, TissueRollSide } from './Art'
 
 function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
   return (
@@ -52,12 +52,49 @@ export function Header() {
   )
 }
 
+function RotatingWord({ words }) {
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = setInterval(() => setIndex((i) => (i + 1) % words.length), 2600)
+    return () => clearInterval(timer)
+  }, [words.length])
+
+  return <em key={index} className="rotating-word">{words[index]}</em>
+}
+
 export function Hero() {
+  const [shift, setShift] = useState(0)
+
+  useEffect(() => {
+    let frame = 0
+    const onScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        setShift(Math.min(window.scrollY, 900))
+      })
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" style={{ '--hy': `${shift}px` }}>
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="hero-decor" aria-hidden="true">
+        <span className="decor decor-1"><TissueSheet /></span>
+        <span className="decor decor-2"><TissueSheet /></span>
+        <span className="decor decor-3"><TissueRollSide /></span>
+        <span className="decor decor-4"><TissueRollSide /></span>
+      </div>
       <div className="container">
         <div className="hero-copy">
-          <h1 className="reveal" style={delay(0)}>{hero.title} <em>{hero.accent}</em></h1>
+          <h1 className="reveal" style={delay(0)}>{hero.title} <RotatingWord words={hero.accents} /></h1>
           <p className="lead reveal" style={delay(1)}>{hero.lead}</p>
           <div className="actions reveal" style={delay(2)}>
             <ShopButton />
@@ -68,6 +105,7 @@ export function Hero() {
           </ul>
         </div>
       </div>
+      <a className="scroll-cue" href="#tentang" aria-label="Gulir ke bagian berikutnya"><span />Gulir</a>
     </section>
   )
 }
@@ -200,7 +238,52 @@ export function Products() {
   )
 }
 
+// Baris logo terus bergerak, jadi :hover bawaan browser tidak ikut berpindah saat kursor diam.
+// Logo di bawah kursor dicek setiap frame dan diberi class `is-hover`.
+function useMarqueeHover(trackRef) {
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+    const marquee = track.parentElement
+    let pointer = null
+    let frame = 0
+    let current = null
+
+    const setCurrent = (next) => {
+      if (next === current) return
+      current?.classList.remove('is-hover')
+      next?.classList.add('is-hover')
+      current = next
+    }
+    const tick = () => {
+      const el = document.elementFromPoint(pointer.x, pointer.y)?.closest('.brand')
+      setCurrent(el && track.contains(el) ? el : null)
+      frame = requestAnimationFrame(tick)
+    }
+    const onMove = (e) => {
+      pointer = { x: e.clientX, y: e.clientY }
+      if (!frame) frame = requestAnimationFrame(tick)
+    }
+    const onLeave = () => {
+      cancelAnimationFrame(frame)
+      frame = 0
+      setCurrent(null)
+    }
+
+    marquee.addEventListener('pointermove', onMove)
+    marquee.addEventListener('pointerleave', onLeave)
+    return () => {
+      onLeave()
+      marquee.removeEventListener('pointermove', onMove)
+      marquee.removeEventListener('pointerleave', onLeave)
+    }
+  }, [trackRef])
+}
+
 export function Brands() {
+  const trackRef = useRef(null)
+  useMarqueeHover(trackRef)
+
   return (
     <section className="section brands-section" id="brand">
       <div className="container">
@@ -210,7 +293,7 @@ export function Brands() {
           <p>{brandsIntro.text}</p>
         </div>
         <div className="brands-marquee reveal">
-          <div className="brands-track">
+          <div className="brands-track" ref={trackRef}>
             {[...brands, ...brands].map((b, i) => (
               <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
                 {b.logo
