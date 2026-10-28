@@ -64,3 +64,15 @@ export function TissueRollSide() {
     </svg>
   )
 }
+
+// Logo toko Shopee "August Store", digambar ulang sebagai vektor agar tetap tajam.
+export function AugustStoreLogo({ className }) {
+  return (
+    <svg className={className} viewBox="0 0 300 108" role="img" aria-label="August Store">
+      <text x="4" y="72" fontFamily="'Playfair Display', Georgia, serif" fontWeight="500" fontSize="84" letterSpacing="-0.5" fill="#141414">August</text>
+      <path d="M8 69 C 22 64, 36 54, 54 47" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" />
+      <path d="M8 69 C 22 64, 36 54, 54 47" fill="none" stroke="#c8202b" strokeWidth="2.6" strokeLinecap="round" />
+      <text x="290" y="102" textAnchor="end" fontFamily="Montserrat, sans-serif" fontWeight="600" fontSize="21" letterSpacing="5" fill="#141414">STORE</text>
+    </svg>
+  )
+}

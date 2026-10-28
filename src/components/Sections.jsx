@@ -3,7 +3,7 @@ import {
   company, nav, hero, about, featuresIntro, features, productsIntro, showcase,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, TissueSheet, TissueRollSide } from './Art'
+import { Icon, TissueSheet, TissueRollSide, AugustStoreLogo } from './Art'
 
 function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
   return (
@@ -318,7 +318,7 @@ export function HowToOrder() {
               <h3>{c.title}</h3>
               {c.key === 'online' && (
                 <a className="store-tag" href={company.shopee} target="_blank" rel="noreferrer">
-                  <img src={company.shopeeStoreLogo} alt="August Store" width="249" height="83" />
+                  <AugustStoreLogo />
                   <span>Toko resmi kami di Shopee</span>
                 </a>
               )}
@@ -434,7 +434,7 @@ export function Footer() {
         <div>
           <h4>Belanja</h4>
           <a className="footer-store" href={company.shopee} target="_blank" rel="noreferrer">
-            <img src={company.shopeeStoreLogo} alt="August Store" width="249" height="83" />
+            <AugustStoreLogo />
           </a>
           <a href={company.shopee} target="_blank" rel="noreferrer">Shopee</a>
           <a href={company.maps} target="_blank" rel="noreferrer">Toko offline</a>
