@@ -54,19 +54,11 @@ export const productsIntro = {
   text: 'Dari kamar mandi sampai dapur, dari tas kerja sampai meja restoran — pilih tissue yang paling pas untuk Anda.',
 }
 
-export const featured = {
-  label: 'Produk unggulan',
-  name: 'Trecy Economy',
-  subtitle: 'Facial Tissue Embossed',
-  image: '/products/trecy-economy.jpg',
-  text: 'Tissue wajah embossed dengan isi 1.000 lembar per pack — lembut, aman untuk wajah, dan hemat untuk dipakai sehari-hari di rumah, kantor maupun usaha.',
-  specs: [
-    { label: 'Isi', value: '1.000 lembar / pack' },
-    { label: 'Jenis', value: 'Facial tissue embossed' },
-    { label: 'Kemasan', value: '2 pack' },
-    { label: 'Keunggulan', value: 'Aman untuk wajah' },
-  ],
-}
+// Foto produk untuk galeri showcase (simpan file di public/products/)
+export const showcase = [
+  { src: '/products/trecy-economy.jpg', alt: 'Trecy Economy Facial Tissue Embossed' },
+  { src: '/products/trecy-facial-1kg.jpg', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
+]
 
 // TODO: sesuaikan nama, varian & keterangan dengan produk yang dijual
 export const products = [
