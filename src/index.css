@@ -183,11 +183,10 @@ p { margin: 0; }
 .brand { cursor: default; }
 .brand img, .brand-name { transition: transform .35s cubic-bezier(.2, .7, .2, 1), opacity .35s, filter .35s; }
 .brand img { max-width: 100%; max-height: 64px; width: auto; height: auto; object-fit: contain; }
-/* abu-abu, berwarna saat disorot */
-.brand img { filter: grayscale(1); opacity: 0.55; }
-.brand img.is-mono { filter: brightness(0); opacity: 0.4; }
-.brand:hover img { filter: grayscale(0) drop-shadow(0 10px 14px rgba(24, 24, 27, 0.16)); opacity: 1; transform: scale(1.12) translateY(-4px); }
-.brand:hover img.is-mono { filter: brightness(0) drop-shadow(0 10px 14px rgba(24, 24, 27, 0.16)); opacity: 0.9; }
+/* logo berwarna; saat disorot membesar dan berbayang */
+.brand img.is-mono { filter: brightness(0); opacity: 0.85; }
+.brand:hover img { filter: drop-shadow(0 10px 14px rgba(24, 24, 27, 0.16)); transform: scale(1.12) translateY(-4px); }
+.brand:hover img.is-mono { filter: brightness(0) drop-shadow(0 10px 14px rgba(24, 24, 27, 0.16)); opacity: 1; }
 .brand-name { font-family: var(--display); font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; color: #52525b; text-align: center; line-height: 1.1; transition: color .3s; }
 .brand:hover .brand-name { color: var(--maroon); }
 .brands-foot { margin-top: 28px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
