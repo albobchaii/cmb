@@ -316,6 +316,12 @@ export function HowToOrder() {
                 <span className="channel-badge">{c.badge}</span>
               </div>
               <h3>{c.title}</h3>
+              {c.key === 'online' && (
+                <a className="store-tag" href={company.shopee} target="_blank" rel="noreferrer">
+                  <img src={company.shopeeStoreLogo} alt="August Store" width="249" height="83" />
+                  <span>Toko resmi kami di Shopee</span>
+                </a>
+              )}
               <ol className="channel-steps">
                 {c.steps.map((s) => (
                   <li key={s.title}>
@@ -427,6 +433,9 @@ export function Footer() {
         </div>
         <div>
           <h4>Belanja</h4>
+          <a className="footer-store" href={company.shopee} target="_blank" rel="noreferrer">
+            <img src={company.shopeeStoreLogo} alt="August Store" width="249" height="83" />
+          </a>
           <a href={company.shopee} target="_blank" rel="noreferrer">Shopee</a>
           <a href={company.maps} target="_blank" rel="noreferrer">Toko offline</a>
         </div>

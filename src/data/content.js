@@ -7,6 +7,7 @@ export const company = {
   tagline: 'Lembut di kulit, kuat saat dipakai, hemat di kantong.',
   shopee: 'https://shopee.co.id/auguststore888?entryPoint=ShopBySearch&searchKeyword=auguststore',
   shopeeName: 'auguststore888',
+  shopeeStoreLogo: '/brand/august-store.png',
   maps: 'https://maps.app.goo.gl/nXnYEGTHGzAVqX8z9',
   directions: 'https://www.google.com/maps/dir/?api=1&destination=-6.1855379,106.6847046',
   mapsQuery: 'Chandra Maju Bersama, Jl. Galaxy Raya No.8B Blk G2, Cipondoh Indah, Kota Tangerang, Banten 15148',
