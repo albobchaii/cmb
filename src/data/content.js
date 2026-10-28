@@ -60,16 +60,6 @@ export const showcase = [
   { src: '/products/trecy-facial-1kg.jpg', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
 ]
 
-// TODO: sesuaikan nama, varian & keterangan dengan produk yang dijual
-export const products = [
-  { kind: 'box', name: 'Tissue Facial', variant: 'Box · 2 ply', tagline: 'Sentuhan lembut untuk wajah', text: 'Lembar halus yang nyaman di kulit dan praktis ditarik satu per satu dari kotaknya.', uses: ['Rumah', 'Kantor', 'Mobil'] },
-  { kind: 'roll', name: 'Tissue Toilet', variant: 'Roll · 2 ply', tagline: 'Lembut, padat, tahan lama', text: 'Gulungan padat yang nyaman dipakai, tidak cepat habis dan mudah terurai di air.', uses: ['Rumah', 'Hotel', 'Gedung'] },
-  { kind: 'towel', name: 'Tissue Dapur', variant: 'Towel roll', tagline: 'Andalan untuk urusan dapur', text: 'Lebih tebal dan kuat untuk menyerap minyak, air dan tumpahan — sekali usap, langsung bersih.', uses: ['Dapur', 'Restoran', 'Katering'] },
-  { kind: 'pack', name: 'Tissue Travel', variant: 'Pocket pack', tagline: 'Kecil di tas, besar manfaatnya', text: 'Kemasan saku yang ringkas untuk menemani bepergian, bekerja, sekolah atau berolahraga.', uses: ['Tas', 'Perjalanan', 'Sekolah'] },
-  { kind: 'napkin', name: 'Tissue Makan', variant: 'Napkin / Serbet', tagline: 'Sentuhan rapi di setiap meja', text: 'Tissue makan dan serbet yang membuat sajian tampil lebih bersih dan profesional.', uses: ['Restoran', 'Kafe', 'Acara'] },
-  { kind: 'bulk', name: 'Paket Grosir', variant: 'Karton / Bal', tagline: 'Hemat untuk kebutuhan besar', text: 'Pembelian dalam jumlah besar dengan harga khusus untuk reseller, hotel, kantor dan usaha kuliner.', uses: ['Reseller', 'Hotel', 'Kantor'] },
-]
-
 export const brandsIntro = {
   title: 'Brand pilihan, dalam satu tempat.',
   text: 'Selain produk CMB, kami juga menyediakan tissue dari merek-merek terpercaya. Belanja jadi lebih praktis — semua kebutuhan tissue Anda tersedia di satu toko.',

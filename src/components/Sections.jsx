@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import {
-  company, nav, hero, about, featuresIntro, features, productsIntro, showcase, products,
+  company, nav, hero, about, featuresIntro, features, productsIntro, showcase,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, ProductArt, TissueSheet, TissueRollSide } from './Art'
+import { Icon, TissueSheet, TissueRollSide } from './Art'
 
 function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
   return (
@@ -216,25 +216,6 @@ export function Products() {
             </figure>
           ))}
         </div>
-        <div className="products">
-          {products.map((p, i) => (
-            <a key={p.name} className="product reveal" style={delay(i % 3)} href={company.shopee} target="_blank" rel="noreferrer">
-              <div className="product-media">
-                <span className="product-meta">{p.variant}</span>
-                <ProductArt kind={p.kind} />
-              </div>
-              <div className="product-info">
-                <p className="product-tagline">{p.tagline}</p>
-                <h3>{p.name}</h3>
-                <p>{p.text}</p>
-                <ul className="product-uses">
-                  {p.uses.map((u) => <li key={u}>{u}</li>)}
-                </ul>
-              </div>
-            </a>
-          ))}
-        </div>
-        <p className="swipe-hint" aria-hidden="true">Geser untuk melihat produk lainnya</p>
         <div className="products-note reveal">
           <p><strong>Tidak menemukan produk yang Anda cari?</strong> Kami juga menerima permintaan khusus untuk kebutuhan usaha.</p>
           <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan via WhatsApp</a>

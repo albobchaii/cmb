@@ -177,26 +177,13 @@ p { margin: 0; }
 .feature p { font-size: 0.95rem; }
 
 /* Galeri foto produk */
-.showcase { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 72px; }
+.showcase { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 32px; }
 .showcase-item { margin: 0; border-radius: 20px; overflow: hidden; background: #f8f1f2; border: 1px solid var(--line); }
 .showcase-item img { display: block; width: 100%; height: auto; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .showcase-item:hover img { transform: scale(1.04); }
 
 /* Products */
-.products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px 32px; }
-.product { display: flex; flex-direction: column; }
-.product-media { position: relative; background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius); aspect-ratio: 4 / 3; display: grid; place-items: center; padding: 14%; transition: background .3s, border-color .3s; }
-.product:hover .product-media { background: var(--maroon-tint); border-color: #ead8db; }
-.product-meta { position: absolute; top: 14px; left: 14px; padding: 4px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 0.75rem; font-weight: 500; color: var(--body); }
-.product-info { padding-top: 22px; }
-.product-tagline { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--maroon); margin-bottom: 6px; }
-.product-info h3 { font-size: 1.2rem; margin-bottom: 8px; }
-.product-info > p:not(.product-tagline) { font-size: 0.95rem; }
-.product-uses { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.product-uses li { padding: 3px 10px; border-radius: 6px; background: var(--bg-alt); border: 1px solid var(--line); font-size: 0.78rem; color: var(--body); }
-.swipe-hint { display: none; align-items: center; gap: 8px; margin-top: 14px; font-size: 0.82rem; color: var(--muted); }
-.swipe-hint::after { content: ''; width: 28px; height: 1px; background: currentColor; }
-.products-note { margin-top: 64px; padding: 28px 32px; border: 1px dashed #dccdcf; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
+.products-note { margin-top: 0; padding: 28px 32px; border: 1px dashed #dccdcf; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
 .products-note strong { color: var(--ink); font-weight: 600; }
 
 /* Brands */
@@ -285,8 +272,6 @@ p { margin: 0; }
 .has-reveal .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--d, 0) * 110ms); }
 .has-reveal .reveal-scale { transform: translateY(20px) scale(.97); }
 .has-reveal .reveal.is-visible { opacity: 1; transform: none; }
-.product-media svg { transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
-.product:hover .product-media svg { transform: scale(1.05) translateY(-4px); }
 
 /* Gulungan tissue mengikuti scroll */
 .tissue { --p: 0; --spin: 0px; --deg: 0deg; pointer-events: none; }
@@ -323,7 +308,6 @@ p { margin: 0; }
   .about-card { position: static; }
   .features, .channels { grid-template-columns: repeat(2, 1fr); }
   .faq-head { position: static; }
-  .products { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 720px) {
@@ -379,20 +363,12 @@ p { margin: 0; }
   .feature p { font-size: 0.9rem; }
 
 
-  .showcase { grid-template-columns: 1fr; gap: 12px; margin-bottom: 40px; }
+  .showcase { grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
   .showcase-item { border-radius: 16px; }
 
   /* Products: geser ke samping */
   .split-head { gap: 16px; }
-  .products { display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 78%; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: -16px; padding: 0 16px 6px; scroll-padding-inline: 16px; scrollbar-width: none; }
-  .products::-webkit-scrollbar { display: none; }
-  .product { scroll-snap-align: start; }
-  .product-media { padding: 16%; }
-  .product-info { padding-top: 16px; }
-  .product-info h3 { font-size: 1.1rem; }
-  .product-info > p:not(.product-tagline) { font-size: 0.9rem; }
-  .swipe-hint { display: flex; }
-  .products-note { margin-top: 32px; padding: 20px; }
+  .products-note { margin-top: 0; padding: 20px; }
 
   /* Brands */
   .brand { flex-basis: 140px; margin-right: 8px; height: 88px; padding: 16px; }
