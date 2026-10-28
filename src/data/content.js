@@ -59,6 +59,7 @@ export const productsIntro = {
 export const showcase = [
   { src: '/products/trecy-economy.jpg', alt: 'Trecy Economy Facial Tissue Embossed' },
   { src: '/products/trecy-facial-1kg.jpg', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
+  { src: '/products/trecy-belah.jpg', alt: 'Trecy Facial Tissue Belah 2 Ply' },
 ]
 
 export const brandsIntro = {
