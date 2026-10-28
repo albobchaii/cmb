@@ -234,7 +234,7 @@ p { margin: 0; }
 .info dt { color: var(--muted); font-size: 0.9rem; }
 .info dd { margin: 0; color: var(--ink); }
 .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); aspect-ratio: 1; background: var(--bg-alt); }
-.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(1.05); }
+.map iframe { width: 100%; height: 100%; border: 0; }
 
 /* FAQ */
 .faq { align-items: start; }
