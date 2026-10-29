@@ -325,7 +325,7 @@ export function Brands() {
           <h2>{brandsIntro.title}</h2>
           <p>{brandsIntro.text}</p>
         </div>
-        <div className="brands-marquee reveal">
+        <div className="brands-marquee">
           <div className="brands-track" ref={trackRef}>
             {[...brands, ...brands].map((b, i) => (
               <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
