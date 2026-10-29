@@ -179,16 +179,29 @@ p { margin: 0; }
 /* Slideshow produk */
 .slider { position: relative; margin: 0 auto 32px; max-width: 880px; }
 .slider-stage { position: relative; aspect-ratio: 16 / 9; }
-.slide { position: absolute; inset: 8% 15% 14%; width: 70%; height: 78%; object-fit: contain; opacity: 0; transform: translateX(6%) scale(0.96); transition: opacity .7s ease, transform .9s cubic-bezier(.2, .7, .2, 1); filter: drop-shadow(0 24px 30px rgba(60, 30, 35, 0.16)); pointer-events: none; }
-.slide.is-active { opacity: 1; transform: none; }
-.slider-shadow { position: absolute; left: 26%; right: 26%; bottom: 7%; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(60, 30, 35, 0.22), transparent); filter: blur(4px); }
+.slide { position: absolute; inset: 8% 15% 14%; width: 70%; height: 78%; object-fit: contain; opacity: 0; filter: drop-shadow(0 24px 30px rgba(60, 30, 35, 0.16)); pointer-events: none; }
+/* masuk dari arah --dir, lalu melayang pelan; slide lama keluar ke arah sebaliknya */
+.slide.is-active { opacity: 1; animation: slide-in 1s cubic-bezier(.2, .7, .2, 1) both, slide-float 6s ease-in-out 1s infinite; }
+.slide.is-leaving { animation: slide-out .7s cubic-bezier(.5, 0, .75, 0) both; }
+@keyframes slide-in { from { opacity: 0; transform: translateX(calc(var(--dir) * 18%)) rotate(calc(var(--dir) * 3deg)) scale(0.9); } }
+@keyframes slide-out { to { opacity: 0; transform: translateX(calc(var(--dir) * -18%)) rotate(calc(var(--dir) * -3deg)) scale(0.9); } }
+@keyframes slide-float { 50% { translate: 0 -10px; } }
+.slider-shadow { position: absolute; left: 26%; right: 26%; bottom: 7%; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(60, 30, 35, 0.22), transparent); filter: blur(4px); animation: shadow-breathe 6s ease-in-out 1s infinite; }
+@keyframes shadow-breathe { 50% { transform: scaleX(0.86); opacity: 0.7; } }
 .slider-arrow { position: absolute; top: 44%; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line); background: #fff; color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; display: grid; place-items: center; padding-bottom: 3px; box-shadow: 0 8px 20px -10px rgba(24, 24, 27, 0.25); transition: color .2s, border-color .2s, transform .2s; }
 .slider-arrow:hover { color: var(--maroon); border-color: var(--maroon); transform: scale(1.06); }
 .slider-prev { left: 0; }
 .slider-next { right: 0; }
 .slider-dots { display: flex; justify-content: center; gap: 8px; }
 .slider-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: #dccdcf; cursor: pointer; transition: width .3s, background .3s; }
-.slider-dots button.is-active { width: 28px; background: var(--maroon); }
+.slider-dots button.is-active { position: relative; overflow: hidden; width: 36px; background: #e6d3d5; }
+/* titik aktif terisi selama 4 detik = waktu menuju slide berikutnya */
+.slider-dots button.is-active::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--maroon); transform-origin: left; animation: dot-progress 4s linear both; }
+.slider.is-paused .slider-dots button.is-active::after { animation: none; }
+@keyframes dot-progress { from { transform: scaleX(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .slide.is-active, .slide.is-leaving, .slider-shadow, .slider-dots button.is-active::after { animation: none; }
+}
 
 /* Products */
 .products-note { margin-top: 0; padding: 28px 32px; border: 1px dashed #dccdcf; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }

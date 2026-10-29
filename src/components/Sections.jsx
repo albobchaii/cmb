@@ -198,26 +198,32 @@ export function Features() {
 }
 
 function ProductSlider({ items }) {
-  const [index, setIndex] = useState(0)
+  // `dir` menentukan arah geser: 1 = ke kiri (berikutnya), -1 = ke kanan (sebelumnya)
+  const [{ index, prev, dir }, setState] = useState({ index: 0, prev: null, dir: 1 })
   const [paused, setPaused] = useState(false)
   const touch = useRef(null)
-  const go = (i) => setIndex((i + items.length) % items.length)
+  const go = (i, d) => setState((s) => {
+    const next = (i + items.length) % items.length
+    if (next === s.index) return s
+    return { index: next, prev: s.index, dir: d ?? (next > s.index ? 1 : -1) }
+  })
 
   useEffect(() => {
     if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const timer = setInterval(() => setIndex((i) => (i + 1) % items.length), 4000)
+    const timer = setInterval(() => go(index + 1, 1), 4000)
     return () => clearInterval(timer)
-  }, [paused, items.length])
+  }, [paused, index, items.length])
 
   return (
     <div
-      className="slider reveal"
+      className={`slider reveal ${paused ? 'is-paused' : ''}`}
+      style={{ '--dir': dir }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => { touch.current = e.touches[0].clientX; setPaused(true) }}
       onTouchEnd={(e) => {
         const dx = e.changedTouches[0].clientX - (touch.current ?? 0)
-        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1))
+        if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1)
         setPaused(false)
       }}
     >
@@ -225,7 +231,7 @@ function ProductSlider({ items }) {
         {items.map((p, i) => (
           <img
             key={p.src}
-            className={`slide ${i === index ? 'is-active' : ''}`}
+            className={`slide ${i === index ? 'is-active' : i === prev ? 'is-leaving' : ''}`}
             src={p.src}
             alt={p.alt}
             aria-hidden={i !== index}
@@ -233,11 +239,12 @@ function ProductSlider({ items }) {
         ))}
         <div className="slider-shadow" aria-hidden="true" />
       </div>
-      <button className="slider-arrow slider-prev" onClick={() => go(index - 1)} aria-label="Produk sebelumnya">‹</button>
-      <button className="slider-arrow slider-next" onClick={() => go(index + 1)} aria-label="Produk berikutnya">›</button>
+      <button className="slider-arrow slider-prev" onClick={() => go(index - 1, -1)} aria-label="Produk sebelumnya">‹</button>
+      <button className="slider-arrow slider-next" onClick={() => go(index + 1, 1)} aria-label="Produk berikutnya">›</button>
       <div className="slider-dots">
         {items.map((p, i) => (
-          <button key={p.src} className={i === index ? 'is-active' : ''} onClick={() => go(i)} aria-label={`Tampilkan ${p.alt}`} />
+          // key berubah agar progres titik aktif mulai ulang tiap ganti slide / jeda
+          <button key={i === index ? `${p.src}-${paused}` : p.src} className={i === index ? 'is-active' : ''} onClick={() => go(i)} aria-label={`Tampilkan ${p.alt}`} />
         ))}
       </div>
     </div>
