@@ -3,7 +3,7 @@ import {
   company, nav, hero, about, featuresIntro, features, productsIntro, showcase,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, TissueSheet, TissueRollSide, AugustStoreLogo } from './Art'
+import { Icon, TissueSheet, AugustStoreLogo } from './Art'
 
 function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
   return (
@@ -88,8 +88,6 @@ export function Hero() {
       <div className="hero-decor" aria-hidden="true">
         <span className="decor decor-1"><TissueSheet /></span>
         <span className="decor decor-2"><TissueSheet /></span>
-        <span className="decor decor-3"><TissueRollSide /></span>
-        <span className="decor decor-4"><TissueRollSide /></span>
       </div>
       <div className="container">
         <div className="hero-copy">
@@ -104,7 +102,6 @@ export function Hero() {
           </ul>
         </div>
       </div>
-      <a className="scroll-cue" href="#tentang" aria-label="Gulir ke bagian berikutnya"><span />Gulir</a>
     </section>
   )
 }
