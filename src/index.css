@@ -197,7 +197,7 @@ p { margin: 0; }
 .slider-dots button.is-active { position: relative; overflow: hidden; width: 36px; background: #e6d3d5; }
 /* titik aktif terisi selama 4 detik = waktu menuju slide berikutnya */
 .slider-dots button.is-active::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: var(--maroon); transform-origin: left; animation: dot-progress 4s linear both; }
-.slider.is-paused .slider-dots button.is-active::after { animation: none; }
+.slider[data-paused] .slider-dots button.is-active::after { animation: none; }
 @keyframes dot-progress { from { transform: scaleX(0); } }
 @media (prefers-reduced-motion: reduce) {
   .slide.is-active, .slide.is-leaving, .slider-shadow, .slider-dots button.is-active::after { animation: none; }

@@ -216,7 +216,8 @@ function ProductSlider({ items }) {
 
   return (
     <div
-      className={`slider reveal ${paused ? 'is-paused' : ''}`}
+      className="slider reveal"
+      data-paused={paused || undefined}
       style={{ '--dir': dir }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
