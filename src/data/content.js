@@ -55,7 +55,7 @@ export const products = [
 ]
 
 // Logo disimpan di public/brands/. Merek tanpa logo (logo: null) tampil sebagai teks.
-// `mono: true` untuk logo berwarna putih, `light: true` untuk logo berwarna sangat terang.
+// `mono: true` untuk logo berwarna putih.
 export const brands = [
   { name: 'Paseo', logo: '/brands/paseo.png', mono: true },
   { name: 'Nice', logo: '/brands/nice.png' },
@@ -69,37 +69,7 @@ export const brands = [
   { name: 'Pulpies', logo: '/brands/pulpies.png' },
   { name: 'Favour', logo: '/brands/favour.png' },
   { name: 'Snowy', logo: '/brands/snowy.png' },
-  { name: 'Yunikon', logo: '/brands/yunikon.png', light: true },
-]
-
-export const orderIntro = {
-  title: 'Belanja dengan cara yang Anda suka.',
-  text: 'Pesan online dari mana saja, atau datang langsung ke toko kami di Cipondoh. Keduanya sama mudahnya.',
-}
-
-export const channels = [
-  {
-    key: 'online',
-    icon: 'bag',
-    badge: 'Paling praktis',
-    title: 'Belanja online via Shopee',
-    steps: [
-      { title: 'Kunjungi toko kami', text: 'Buka toko CMB di Shopee dan jelajahi katalog lengkap kami.' },
-      { title: 'Pilih & checkout', text: 'Masukkan produk ke keranjang, lalu bayar dengan metode favorit Anda.' },
-      { title: 'Terima di rumah', text: 'Pesanan dikemas rapi dan dikirim langsung ke alamat Anda.' },
-    ],
-  },
-  {
-    key: 'offline',
-    icon: 'pin',
-    badge: 'Cocok untuk grosir',
-    title: 'Datang langsung ke toko',
-    steps: [
-      { title: 'Cek jam buka', text: `Kami buka ${company.hours}.` },
-      { title: 'Lihat & pilih langsung', text: 'Lihat produk secara langsung dan konsultasikan kebutuhan Anda dengan tim kami.' },
-      { title: 'Bawa pulang hari itu juga', text: 'Bayar di toko dan bawa pulang pesanan Anda tanpa menunggu pengiriman.' },
-    ],
-  },
+  { name: 'Yunikon', logo: '/brands/yunikon.png' },
 ]
 
 export const locationIntro = {
@@ -123,17 +93,11 @@ export const faqs = [
   { q: 'Bagaimana jika ada kendala dengan pesanan saya?', a: 'Hubungi kami melalui WhatsApp atau fitur chat di Shopee. Kami akan membantu menyelesaikannya secepat mungkin.' },
 ]
 
-export const cta = {
-  title: 'Mari tumbuh bersama CMB.',
-  text: 'Punya toko, hotel, restoran atau kantor? Dapatkan penawaran harga khusus dan pasokan tissue yang bisa diandalkan — dari mitra yang ingin maju bersama Anda.',
-  perks: ['Harga khusus pembelian grosir', 'Konsultasi kebutuhan produk', 'Pemesanan rutin lebih mudah'],
-}
-
 export const footer = {
   blurb: 'Tissue lembut, kuat dan higienis untuk rumah dan usaha Anda. Maju bersama sejak 2021.',
 }
 
-// TODO: tinjau & sesuaikan cerita, visi, misi dan nilai berikut dengan versi resmi perusahaan
+// TODO: tinjau & sesuaikan cerita berikut dengan versi resmi perusahaan
 export const about = {
   title: 'Maju bersama, dari selembar tissue.',
   lead: 'CMB lahir dari keyakinan sederhana: produk yang dipakai setiap hari harus bisa diandalkan setiap hari.',
@@ -141,18 +105,6 @@ export const about = {
     'Didirikan pada tahun 2021 di Tangerang, Banten, CV. Chandra Maju Bersama (CMB) bergerak di bidang kertas dengan fokus pada produk tissue — mulai dari tissue wajah, toilet, dapur, hingga kebutuhan grosir untuk usaha.',
     'Nama "Maju Bersama" bukan sekadar nama. Kami tumbuh bersama pelanggan, reseller dan mitra usaha: ketika mereka berkembang, kami ikut berkembang. Karena itu kami menjaga kualitas produk, harga yang bersahabat, dan pelayanan yang ramah di setiap pesanan.',
     'Hari ini CMB melayani pelanggan melalui toko fisik kami di Cipondoh, Kota Tangerang, serta toko online di Shopee — sehingga produk kami mudah dijangkau, baik untuk kebutuhan rumah maupun usaha.',
-  ],
-  vision: 'Menjadi pilihan utama produk tissue yang berkualitas dan terjangkau bagi keluarga dan pelaku usaha di Indonesia.',
-  mission: [
-    'Menyediakan tissue yang lembut, kuat dan higienis untuk kebutuhan sehari-hari.',
-    'Menjaga harga tetap bersahabat bagi pelanggan eceran maupun grosir.',
-    'Memberikan pelayanan yang cepat, jujur dan ramah.',
-    'Tumbuh bersama mitra, reseller dan pelaku usaha lokal.',
-  ],
-  values: [
-    { icon: 'award', title: 'Kualitas', text: 'Setiap produk dipilih dan diperiksa agar nyaman dipakai dan layak dipercaya.' },
-    { icon: 'shield', title: 'Kepercayaan', text: 'Kami menjaga konsistensi produk, stok dan harga agar pelanggan tenang berbelanja.' },
-    { icon: 'users', title: 'Kebersamaan', text: 'Sesuai nama kami — kami maju bersama pelanggan, mitra dan tim.' },
   ],
   audiences: ['Rumah tangga', 'Perkantoran', 'Hotel & penginapan', 'Restoran & kafe', 'Reseller & toko'],
 }
