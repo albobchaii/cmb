@@ -31,6 +31,8 @@ export function Icon({ name }) {
       return <svg {...common}><path d="M20 4c-7 0-13 5-13 12v4" /><path d="M20 4c0 8-5 12-13 12" /><path d="M7 16l6-6" /></svg>
     case 'layers':
       return <svg {...common}><path d="M12 3l9 5-9 5-9-5z" /><path d="M3 13l9 5 9-5" /></svg>
+    case 'search':
+      return <svg {...common}><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
     case 'tag':
       return <svg {...common}><path d="M3 12V4h8l10 10-8 8z" /><circle cx="7.5" cy="8.5" r="1.5" /></svg>
     default:

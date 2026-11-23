@@ -19,21 +19,15 @@ export const company = {
 }
 
 export const nav = [
-  { label: 'Tentang', href: '#tentang' },
-  { label: 'Keunggulan', href: '#keunggulan' },
-  { label: 'Produk', href: '#produk' },
+  { label: 'Katalog', href: '#katalog' },
   { label: 'Cara Belanja', href: '#cara-belanja' },
+  { label: 'Keunggulan', href: '#keunggulan' },
+  { label: 'Tentang', href: '#tentang' },
   { label: 'Lokasi', href: '#lokasi' },
   { label: 'FAQ', href: '#faq' },
 ]
 
-export const hero = {
-  title: 'Tissue berkualitas untuk',
-  // kata berwarna di judul, bergantian otomatis
-  accents: ['setiap hari.', 'rumah Anda.', 'usaha Anda.', 'kantor Anda.'],
-  lead: 'Dari meja makan hingga meja kantor, tissue CMB hadir lembut di kulit, kuat saat dipakai, dan tetap ramah di kantong. Tersedia eceran maupun grosir — langsung dari CV. Chandra Maju Bersama.',
-  points: ['Lembut & tidak mudah sobek', 'Eceran & grosir', 'Toko offline & Shopee'],
-}
+export const topbar = 'Lembut di kulit, kuat saat dipakai — eceran & grosir'
 
 export const featuresIntro = {
   title: 'Kualitas yang terasa di setiap lembar.',
@@ -49,22 +43,17 @@ export const features = [
   { icon: 'truck', title: 'Stok selalu siap', text: 'Stok terjaga untuk eceran maupun grosir, siap dikirim ke seluruh Indonesia melalui Shopee.' },
 ]
 
-export const productsIntro = {
-  title: 'Satu merek, untuk setiap kebutuhan.',
-  text: 'Dari kamar mandi sampai dapur, dari tas kerja sampai meja restoran — pilih tissue yang paling pas untuk Anda.',
+export const catalogIntro = {
+  title: 'Semua Produk',
+  text: 'Jelajahi tissue produksi CMB dan merek-merek pilihan yang kami sediakan — untuk rumah, kantor, hotel maupun usaha kuliner. Tanyakan harga eceran & grosir langsung lewat WhatsApp, atau belanja di Shopee.',
 }
 
-// Foto produk (PNG latar transparan) untuk slideshow — simpan di public/products/
-export const showcase = [
-  { src: '/products/trecy-economy.png', alt: 'Trecy Economy Facial Tissue Embossed' },
-  { src: '/products/trecy-facial-1kg.png', alt: 'Trecy Facial Tissue 1 Kg 2 Ply' },
-  { src: '/products/trecy-belah.png', alt: 'Trecy Facial Tissue Belah 2 Ply' },
+// Produk CMB (foto PNG latar transparan di public/products/)
+export const products = [
+  { name: 'Trecy Economy Facial Tissue Embossed', note: '1000 lembar · embossed', image: '/products/trecy-economy.png' },
+  { name: 'Trecy Facial Tissue 1 Kg', note: '1 Kg · 2 ply', image: '/products/trecy-facial-1kg.png' },
+  { name: 'Trecy Facial Tissue Belah', note: '2 ply · hingga 4800 helai', image: '/products/trecy-belah.png' },
 ]
-
-export const brandsIntro = {
-  title: 'Brand pilihan, dalam satu tempat.',
-  text: 'Selain produk CMB, kami juga menyediakan tissue dari merek-merek terpercaya. Belanja jadi lebih praktis — semua kebutuhan tissue Anda tersedia di satu toko.',
-}
 
 // Logo disimpan di public/brands/. Merek tanpa logo (logo: null) tampil sebagai teks.
 // `mono: true` untuk logo berwarna putih, `light: true` untuk logo berwarna sangat terang.
