@@ -118,18 +118,31 @@ export function Catalog({ query, setQuery }) {
   const q = query.trim().toLowerCase()
   const items = products.filter((p) =>
     (!brand || p.brand === brand) && (!q || `${p.brand} ${p.name}`.toLowerCase().includes(q)))
-  const pick = (name) => {
-    setBrand(brand === name ? null : name)
+  const show = (name) => {
+    setBrand(name)
     document.getElementById('produk')?.scrollIntoView({ behavior: 'smooth' })
   }
+  const pick = (name) => show(brand === name ? null : name)
 
   return (
     <>
       <section className="categories" id="katalog">
         <div className="container">
-          <div className="catalog-head">
-            <h1>{catalogIntro.title}</h1>
-            <p>{catalogIntro.text}</p>
+          <div className="hero">
+            <div className="catalog-head">
+              <span className="eyebrow">Produk utama CMB</span>
+              <h1>{catalogIntro.title}</h1>
+              <p>{catalogIntro.text}</p>
+              <div className="actions">
+                <button type="button" className="btn btn-dark" onClick={() => show('Trecy')}>Lihat produk Trecy</button>
+                <ShopButton variant="outline">Belanja di Shopee</ShopButton>
+              </div>
+            </div>
+            <figure className="hero-photo">
+              <img src="/products/trecy-lifestyle.jpg" alt="Tiga produk tissue Trecy: Facial Tissue Belah, Economy Embossed dan Facial Tissue 1 Kg"
+                width="1200" height="896" fetchpriority="high" />
+              <figcaption><b>Trecy</b> · Aman untuk wajah</figcaption>
+            </figure>
           </div>
           <div className="cat-panel">
           <div className="cat-head">
