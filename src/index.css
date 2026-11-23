@@ -92,7 +92,7 @@ p { margin: 0; }
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px; }
 .card { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; transition: box-shadow .3s, transform .3s; animation: card-in .6s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--d, 0) * 60ms); }
 @keyframes card-in { from { opacity: 0; transform: translateY(16px); } }
-.card:hover { box-shadow: 0 18px 40px -24px rgba(42, 20, 22, 0.35); transform: translateY(-3px); }
+.card:hover { box-shadow: 0 18px 40px -24px rgba(42, 20, 22, 0.35); }
 .card-media { aspect-ratio: 1; background: var(--peach); display: grid; place-items: center; padding: 12%; overflow: hidden; }
 .card-media img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 16px 18px rgba(90, 20, 25, 0.18)); transition: transform .5s cubic-bezier(.2, .7, .2, 1); }
 .card:hover .card-media img { transform: scale(1.05); }
@@ -103,11 +103,7 @@ p { margin: 0; }
 .card-media img.is-light { filter: brightness(0.62) saturate(1.8); }
 .card-body { flex: 1; display: flex; flex-direction: column; padding: 24px; }
 .card-label { font-size: 0.85rem; color: var(--muted); }
-.card h3 { font-size: 1.35rem; font-weight: 500; margin-top: 6px; }
-.card-note { font-size: 0.92rem; margin-top: 6px; }
-.card-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin-top: auto; padding-top: 20px; }
-.card-link { font-size: 0.92rem; font-weight: 500; color: var(--maroon); border-bottom: 1.5px solid currentColor; }
-.card-link:hover { color: var(--maroon-dark); }
+.card h3 { font-size: 1.3rem; font-weight: 500; margin-top: 6px; }
 .empty { padding: 56px 24px; border: 1px dashed var(--line); border-radius: var(--radius); text-align: center; display: grid; justify-items: center; gap: 20px; }
 .empty strong { color: var(--ink); }
 .catalog-note { margin-top: 56px; padding: 28px 32px; border-radius: var(--radius); background: var(--peach); display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; }
@@ -268,11 +264,7 @@ p { margin: 0; }
   .card-body { padding: 14px; }
   .card-label { font-size: 0.75rem; }
   .card h3 { font-size: 1rem; }
-  .card-note { font-size: 0.8rem; }
-  .card-actions { padding-top: 14px; gap: 8px; }
-  .card-actions .btn { width: 100%; height: 38px; font-size: 0.85rem; }
-  .card-link { font-size: 0.82rem; }
-  .catalog-note { margin-top: 36px; padding: 22px; }
+        .catalog-note { margin-top: 36px; padding: 22px; }
   .catalog-note .btn { width: 100%; }
 
   .channel { padding: 24px; }

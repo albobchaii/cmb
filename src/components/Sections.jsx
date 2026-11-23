@@ -77,8 +77,8 @@ export function Header({ query, setQuery }) {
 
 // Semua item katalog: produk CMB lalu merek lain yang kami jual.
 const catalog = [
-  ...products.map((p) => ({ ...p, group: 'cmb', label: 'Produk CMB' })),
-  ...brands.map((b) => ({ name: b.name, note: 'Tanyakan varian & stok', image: b.logo, group: 'brand', label: 'Merek pilihan', logo: true, mono: b.mono, light: b.light })),
+  ...products.map((p) => ({ ...p, group: 'cmb' })),
+  ...brands.map((b) => ({ name: b.name, category: 'Merek pilihan', image: b.logo, group: 'brand', logo: true, mono: b.mono, light: b.light })),
 ]
 
 const filters = [
@@ -94,13 +94,8 @@ function ProductCard({ item, index }) {
         <img className={item.mono ? 'is-mono' : item.light ? 'is-light' : undefined} src={item.image} alt={item.name} loading="lazy" />
       </div>
       <div className="card-body">
-        <p className="card-label">{item.label}</p>
+        <p className="card-label">{item.category}</p>
         <h3>{item.name}</h3>
-        <p className="card-note">{item.note}</p>
-        <div className="card-actions">
-          <a className="btn btn-dark btn-sm" href={askPrice(item.name)} target="_blank" rel="noreferrer">Tanya harga</a>
-          {item.group === 'cmb' && <a className="card-link" href={company.shopee} target="_blank" rel="noreferrer">Lihat di Shopee</a>}
-        </div>
       </div>
     </article>
   )

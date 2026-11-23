@@ -50,9 +50,9 @@ export const catalogIntro = {
 
 // Produk CMB (foto PNG latar transparan di public/products/)
 export const products = [
-  { name: 'Trecy Economy Facial Tissue Embossed', note: '1000 lembar · embossed', image: '/products/trecy-economy.png' },
-  { name: 'Trecy Facial Tissue 1 Kg', note: '1 Kg · 2 ply', image: '/products/trecy-facial-1kg.png' },
-  { name: 'Trecy Facial Tissue Belah', note: '2 ply · hingga 4800 helai', image: '/products/trecy-belah.png' },
+  { name: 'Trecy Economy Facial Tissue Embossed', category: 'Facial Tissue', image: '/products/trecy-economy.png' },
+  { name: 'Trecy Facial Tissue 1 Kg', category: 'Facial Tissue', image: '/products/trecy-facial-1kg.png' },
+  { name: 'Trecy Facial Tissue Belah', category: 'Facial Tissue', image: '/products/trecy-belah.png' },
 ]
 
 // Logo disimpan di public/brands/. Merek tanpa logo (logo: null) tampil sebagai teks.
