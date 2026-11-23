@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   company, nav, topbar, about, featuresIntro, features, catalogIntro, products, brands,
   locationIntro, faqIntro, faqs, footer,
@@ -82,10 +82,11 @@ const categories = [
 ]
 const countOf = (brand) => products.filter((p) => p.brand === brand).length
 
-function CategoryTile({ cat, active, onSelect }) {
+function CategoryTile({ cat, active, onSelect, hidden }) {
   const n = countOf(cat.name)
   return (
-    <button className={`cat ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}>
+    <button className={`cat ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}
+      aria-hidden={hidden || undefined} tabIndex={hidden ? -1 : undefined}>
       <span className="cat-logo">
         {cat.wordmark
           ? <TrecyLogo />
@@ -113,11 +114,6 @@ function ProductCard({ item, index }) {
 
 export function Catalog({ query, setQuery }) {
   const [brand, setBrand] = useState(null)
-  const rowRef = useRef(null)
-  const slide = (dir) => {
-    const row = rowRef.current
-    if (row) row.scrollBy({ left: dir * row.clientWidth * 0.8, behavior: 'smooth' })
-  }
   const q = query.trim().toLowerCase()
   const items = products.filter((p) =>
     (!brand || p.brand === brand) && (!q || `${p.brand} ${p.name}`.toLowerCase().includes(q)))
@@ -137,19 +133,18 @@ export function Catalog({ query, setQuery }) {
           <div className="cat-head">
             <h2>Kategori merek</h2>
             <p>Pilih merek tissue untuk melihat produknya.</p>
-            <div className="cat-nav">
-              <button type="button" aria-label="Geser ke kiri" onClick={() => slide(-1)}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-              </button>
-              <button type="button" aria-label="Geser ke kanan" onClick={() => slide(1)}>
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-              </button>
-            </div>
           </div>
-          <div className="cat-grid" ref={rowRef}>
-            {categories.map((c) => (
-              <CategoryTile key={c.name} cat={c} active={brand === c.name} onSelect={() => pick(c.name)} />
-            ))}
+          {/* slideshow berjalan: daftar merek digandakan agar putarannya menyambung tanpa jeda */}
+          <div className="cat-marquee">
+            <div className="cat-track">
+              {[false, true].map((copy) => (
+                <div className="cat-set" key={String(copy)}>
+                  {categories.map((c) => (
+                    <CategoryTile key={c.name} cat={c} hidden={copy} active={brand === c.name} onSelect={() => pick(c.name)} />
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

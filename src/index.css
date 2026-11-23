@@ -83,13 +83,15 @@ p { margin: 0; }
 .cat-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 24px; margin: 48px 0 20px; }
 .cat-head h2 { font-size: 1.5rem; }
 .cat-head p { color: var(--muted); flex: 1; }
-.cat-nav { display: flex; gap: 8px; }
-.cat-nav button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; transition: border-color .2s, background .2s; }
-.cat-nav button:hover { border-color: var(--maroon); color: var(--maroon); }
-.cat-nav svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.cat-grid { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 6 * 16px) / 7); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 2px 0 6px; }
-.cat-grid::-webkit-scrollbar { display: none; }
-.cat-grid > .cat { scroll-snap-align: start; }
+.cat-marquee { position: relative; overflow: hidden; padding: 2px 0 6px; }
+.cat-marquee::before, .cat-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 1; pointer-events: none; }
+.cat-marquee::before { left: 0; background: linear-gradient(90deg, #fff, rgba(255,255,255,0)); }
+.cat-marquee::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255,255,255,0)); }
+.cat-track { display: flex; width: max-content; animation: cat-run 50s linear infinite; }
+.cat-marquee:hover .cat-track, .cat-marquee:focus-within .cat-track { animation-play-state: paused; }
+.cat-set { display: flex; gap: 16px; padding-right: 16px; }
+.cat-set .cat { flex: 0 0 176px; }
+@keyframes cat-run { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
 .cat { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 0 16px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); cursor: pointer; overflow: hidden; text-align: center; transition: border-color .2s, box-shadow .2s; }
 .cat:hover { border-color: var(--ink); }
 .cat.is-active { border-color: var(--maroon); box-shadow: 0 0 0 2px var(--maroon); }
@@ -241,7 +243,6 @@ p { margin: 0; }
 /* Responsif */
 @media (max-width: 1180px) {
   .grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .cat-grid { grid-auto-columns: calc((100% - 4 * 16px) / 5); }
   .logo-text { display: none; }
 }
 @media (max-width: 960px) {
@@ -256,7 +257,6 @@ p { margin: 0; }
   .nav-inner { flex-direction: column; align-items: stretch; gap: 0; height: auto; padding: 4px 0 12px; }
   .nav-inner a { padding: 13px 0; border-bottom: 1px solid var(--line); }
   .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .cat-grid { grid-auto-columns: calc((100% - 3 * 16px) / 4); }
   .channels, .about-grid, .location, .faq { grid-template-columns: 1fr; }
   .features { grid-template-columns: repeat(2, 1fr); }
   .about-card, .faq-head { position: static; }
@@ -276,12 +276,13 @@ p { margin: 0; }
   .categories { padding-top: 32px; }
   .catalog-head p { font-size: 0.98rem; }
   .cat-head { margin: 32px 0 14px; }
-  .cat-nav { display: none; }
   .cat-head p { flex-basis: 100%; }
   .cat-head h2, .toolbar h2 { font-size: 1.25rem; }
-  .cat-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; gap: 10px; margin-inline: -16px; padding: 2px 16px 6px; scrollbar-width: none; }
-  .cat-grid::-webkit-scrollbar { display: none; }
-  .cat { flex: 0 0 120px; scroll-snap-align: start; padding-bottom: 12px; }
+  .cat-marquee { margin-inline: -16px; }
+  .cat-marquee::before, .cat-marquee::after { width: 32px; }
+  .cat-set { gap: 10px; padding-right: 10px; }
+  .cat-set .cat { flex-basis: 124px; padding-bottom: 12px; }
+  .cat-track { animation-duration: 40s; }
   .cat-name { font-size: 0.9rem; }
   .catalog { padding-top: 36px; }
   .toolbar { padding-top: 28px; }
@@ -326,4 +327,5 @@ p { margin: 0; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .has-reveal .reveal { opacity: 1; transform: none; }
+  .cat-marquee { overflow-x: auto; }
 }
