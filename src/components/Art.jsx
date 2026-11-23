@@ -51,3 +51,13 @@ export function AugustStoreLogo({ className }) {
     </svg>
   )
 }
+
+// Wordmark Trecy (meniru tulisan di kemasan: huruf slab putih bergaris merah).
+export function TrecyLogo() {
+  return (
+    <svg viewBox="0 0 240 80" role="img" aria-label="Trecy">
+      <text x="120" y="60" textAnchor="middle" fontFamily="'Alfa Slab One', Rockwell, Georgia, serif" fontSize="54" letterSpacing="1"
+        fill="#fff" stroke="#c8202b" strokeWidth="9" strokeLinejoin="round" paintOrder="stroke">TRECY</text>
+    </svg>
+  )
+}

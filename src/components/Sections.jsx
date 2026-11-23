@@ -3,7 +3,7 @@ import {
   company, nav, topbar, about, featuresIntro, features, catalogIntro, products, brands,
   orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, AugustStoreLogo } from './Art'
+import { Icon, AugustStoreLogo, TrecyLogo } from './Art'
 
 const whatsapp = `https://wa.me/${company.whatsapp}`
 const askPrice = (name) => `${whatsapp}?text=${encodeURIComponent(`Halo CMB, saya ingin menanyakan harga ${name}.`)}`
@@ -75,26 +75,36 @@ export function Header({ query, setQuery }) {
   )
 }
 
-// Semua item katalog: produk CMB lalu merek lain yang kami jual.
-const catalog = [
-  ...products.map((p) => ({ ...p, group: 'cmb' })),
-  ...brands.map((b) => ({ name: b.name, category: 'Merek pilihan', image: b.logo, group: 'brand', logo: true, mono: b.mono, light: b.light })),
+// Kategori katalog = merek tissue. Trecy (produk CMB) di depan, lalu merek lain yang kami jual.
+const categories = [
+  { name: 'Trecy', wordmark: true },
+  ...brands,
 ]
+const countOf = (brand) => products.filter((p) => p.brand === brand).length
 
-const filters = [
-  { key: 'all', label: 'Semua' },
-  { key: 'cmb', label: 'Produk CMB' },
-  { key: 'brand', label: 'Merek lain' },
-]
+function CategoryTile({ cat, active, onSelect }) {
+  const n = countOf(cat.name)
+  return (
+    <button className={`cat ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}>
+      <span className="cat-logo">
+        {cat.wordmark
+          ? <TrecyLogo />
+          : <img className={cat.mono ? 'is-mono' : cat.light ? 'is-light' : undefined} src={cat.logo} alt="" loading="lazy" />}
+      </span>
+      <span className="cat-name">{cat.name}</span>
+      <span className="cat-count">{n ? `${n} produk` : 'Tanya stok'}</span>
+    </button>
+  )
+}
 
 function ProductCard({ item, index }) {
   return (
     <article className="card" style={delay(index % 8)}>
-      <div className={`card-media ${item.logo ? 'is-logo' : ''}`}>
-        <img className={item.mono ? 'is-mono' : item.light ? 'is-light' : undefined} src={item.image} alt={item.name} loading="lazy" />
+      <div className="card-media">
+        <img src={item.image} alt={item.name} loading="lazy" />
       </div>
       <div className="card-body">
-        <p className="card-label">{item.category}</p>
+        <p className="card-label">{item.brand}</p>
         <h3>{item.name}</h3>
       </div>
     </article>
@@ -102,44 +112,66 @@ function ProductCard({ item, index }) {
 }
 
 export function Catalog({ query, setQuery }) {
-  const [filter, setFilter] = useState('all')
+  const [brand, setBrand] = useState(null)
   const q = query.trim().toLowerCase()
-  const items = catalog.filter((item) =>
-    (filter === 'all' || item.group === filter) && (!q || item.name.toLowerCase().includes(q)))
+  const items = products.filter((p) =>
+    (!brand || p.brand === brand) && (!q || `${p.brand} ${p.name}`.toLowerCase().includes(q)))
+  const pick = (name) => {
+    setBrand(brand === name ? null : name)
+    document.getElementById('produk')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <section className="catalog" id="katalog">
-      <div className="container">
-        <div className="catalog-head">
-          <h1>{catalogIntro.title}</h1>
-          <p>{catalogIntro.text}</p>
-        </div>
-        <div className="toolbar">
-          <span className="toolbar-label">Filter:</span>
-          <div className="chips">
-            {filters.map((f) => (
-              <button key={f.key} className={`chip ${filter === f.key ? 'is-active' : ''}`} onClick={() => setFilter(f.key)}>{f.label}</button>
+    <>
+      <section className="categories" id="katalog">
+        <div className="container">
+          <div className="catalog-head">
+            <h1>{catalogIntro.title}</h1>
+            <p>{catalogIntro.text}</p>
+          </div>
+          <div className="cat-head">
+            <h2>Kategori merek</h2>
+            <p>Pilih merek tissue untuk melihat produknya.</p>
+          </div>
+          <div className="cat-grid">
+            {categories.map((c) => (
+              <CategoryTile key={c.name} cat={c} active={brand === c.name} onSelect={() => pick(c.name)} />
             ))}
           </div>
-          {query && <button className="chip chip-clear" onClick={() => setQuery('')}>“{query}” ✕</button>}
         </div>
-        <p className="count">{items.length} produk</p>
-        {items.length > 0 ? (
-          <div className="grid">
-            {items.map((item, i) => <ProductCard key={item.name} item={item} index={i} />)}
+      </section>
+
+      <section className="catalog" id="produk">
+        <div className="container">
+          <div className="toolbar">
+            <h2>{brand ? `Produk ${brand}` : 'Semua produk'}</h2>
+            <div className="chips">
+              <button className={`chip ${!brand ? 'is-active' : ''}`} onClick={() => setBrand(null)}>Semua merek</button>
+              {brand && <button className="chip is-active" onClick={() => setBrand(null)}>{brand} ✕</button>}
+              {query && <button className="chip chip-clear" onClick={() => setQuery('')}>“{query}” ✕</button>}
+            </div>
           </div>
-        ) : (
-          <div className="empty">
-            <p><strong>Produk tidak ditemukan.</strong> Mungkin produknya tersedia tapi belum ada di katalog ini.</p>
-            <a className="btn btn-dark" href={askPrice(query || 'produk tissue')} target="_blank" rel="noreferrer"><Icon name="phone" /> Tanyakan via WhatsApp</a>
+          <p className="count">{items.length} produk</p>
+          {items.length > 0 ? (
+            <div className="grid">
+              {items.map((item, i) => <ProductCard key={item.name} item={item} index={i} />)}
+            </div>
+          ) : (
+            <div className="empty">
+              <p>
+                <strong>{brand ? `Produk ${brand} tersedia di toko kami.` : 'Produk tidak ditemukan.'}</strong>{' '}
+                {brand ? 'Foto katalognya belum kami unggah — tanyakan varian dan stoknya lewat WhatsApp.' : 'Mungkin produknya tersedia tapi belum ada di katalog ini.'}
+              </p>
+              <a className="btn btn-dark" href={askPrice(brand ? `tissue ${brand}` : query || 'produk tissue')} target="_blank" rel="noreferrer"><Icon name="phone" /> Tanyakan via WhatsApp</a>
+            </div>
+          )}
+          <div className="catalog-note">
+            <p><strong>Butuh dalam jumlah besar?</strong> Kami melayani grosir untuk toko, hotel, kantor dan usaha kuliner.</p>
+            <a className="btn btn-outline" href={askPrice('pembelian grosir')} target="_blank" rel="noreferrer">Minta penawaran grosir</a>
           </div>
-        )}
-        <div className="catalog-note">
-          <p><strong>Butuh dalam jumlah besar?</strong> Kami melayani grosir untuk toko, hotel, kantor dan usaha kuliner.</p>
-          <a className="btn btn-outline" href={askPrice('pembelian grosir')} target="_blank" rel="noreferrer">Minta penawaran grosir</a>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }
 

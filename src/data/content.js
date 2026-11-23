@@ -44,15 +44,15 @@ export const features = [
 ]
 
 export const catalogIntro = {
-  title: 'Semua Produk',
+  title: 'Katalog Produk',
   text: 'Jelajahi tissue produksi CMB dan merek-merek pilihan yang kami sediakan — untuk rumah, kantor, hotel maupun usaha kuliner. Tanyakan harga eceran & grosir langsung lewat WhatsApp, atau belanja di Shopee.',
 }
 
 // Produk CMB (foto PNG latar transparan di public/products/)
 export const products = [
-  { name: 'Trecy Economy Facial Tissue Embossed', category: 'Facial Tissue', image: '/products/trecy-economy.png' },
-  { name: 'Trecy Facial Tissue 1 Kg', category: 'Facial Tissue', image: '/products/trecy-facial-1kg.png' },
-  { name: 'Trecy Facial Tissue Belah', category: 'Facial Tissue', image: '/products/trecy-belah.png' },
+  { name: 'Trecy Economy Facial Tissue Embossed', brand: 'Trecy', category: 'Facial Tissue', image: '/products/trecy-economy.png' },
+  { name: 'Trecy Facial Tissue 1 Kg', brand: 'Trecy', category: 'Facial Tissue', image: '/products/trecy-facial-1kg.png' },
+  { name: 'Trecy Facial Tissue Belah', brand: 'Trecy', category: 'Facial Tissue', image: '/products/trecy-belah.png' },
 ]
 
 // Logo disimpan di public/brands/. Merek tanpa logo (logo: null) tampil sebagai teks.
