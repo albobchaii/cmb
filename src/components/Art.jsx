@@ -38,22 +38,6 @@ export function Icon({ name }) {
   }
 }
 
-// Dekorasi hero: lembar tissue dan gulungan tampak samping.
-export function TissueSheet() {
-  return (
-    <svg viewBox="0 0 160 160" aria-hidden="true">
-      <defs>
-        <pattern id="sheet-dots" width="10" height="10" patternUnits="userSpaceOnUse">
-          <circle cx="5" cy="5" r="1.1" fill="#e9d3d6" />
-        </pattern>
-      </defs>
-      <path d="M18 22 Q50 14 80 20 T142 18 Q148 50 142 80 T144 140 Q110 148 80 142 T16 144 Q10 110 16 80 T18 22Z" fill="#fff" stroke="#ecdcde" strokeWidth="1.5" />
-      <path d="M18 22 Q50 14 80 20 T142 18 Q148 50 142 80 T144 140 Q110 148 80 142 T16 144 Q10 110 16 80 T18 22Z" fill="url(#sheet-dots)" />
-      <path d="M22 82 Q80 76 140 82" fill="none" stroke="#ecdcde" strokeWidth="1.2" strokeDasharray="4 5" />
-    </svg>
-  )
-}
-
 // Logo toko Shopee "August Store", digambar ulang sebagai vektor agar tetap tajam.
 export function AugustStoreLogo({ className }) {
   return (

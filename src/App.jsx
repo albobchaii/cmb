@@ -1,5 +1,4 @@
-import { Header, Hero, About, Features, Products, Brands, HowToOrder, Location, Faq, CallToAction, Footer } from './components/Sections'
-import TissueRoll from './components/TissueRoll'
+import { Announcement, Header, Hero, About, Features, Products, Brands, HowToOrder, Location, Faq, CallToAction, Footer } from './components/Sections'
 import useReveal from './useReveal'
 
 export default function App() {
@@ -7,8 +6,8 @@ export default function App() {
 
   return (
     <>
+      <Announcement />
       <Header />
-      <TissueRoll />
       <main>
         <Hero />
         <About />

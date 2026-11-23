@@ -3,7 +3,9 @@ import {
   company, nav, hero, about, featuresIntro, features, productsIntro, showcase,
   brandsIntro, brands, orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
 } from '../data/content'
-import { Icon, TissueSheet, AugustStoreLogo } from './Art'
+import { Icon, AugustStoreLogo } from './Art'
+
+const whatsapp = `https://wa.me/${company.whatsapp}`
 
 function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
   return (
@@ -16,16 +18,30 @@ function ShopButton({ children = 'Belanja di Shopee', variant = 'primary' }) {
 
 const delay = (i) => ({ '--d': i })
 
-function SectionLabel({ index, children }) {
-  return <p className="label"><span>{index}</span>{children}</p>
+function Eyebrow({ children }) {
+  return <p className="eyebrow">{children}</p>
 }
+
+export function Announcement() {
+  return (
+    <div className="announce">
+      <div className="container">
+        Belanja online di <a href={company.shopee} target="_blank" rel="noreferrer">Shopee August Store</a>
+        <span className="announce-extra"> · Grosir &amp; eceran? <a href={whatsapp} target="_blank" rel="noreferrer">Tanya via WhatsApp</a></span>
+      </div>
+    </div>
+  )
+}
+
+// Di desktop link ini disembunyikan agar logo tetap di tengah; tetap ada di menu HP & footer.
+const headerExtras = ['#keunggulan', '#faq']
 
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -34,19 +50,21 @@ export function Header() {
   return (
     <header className={`header ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="container header-inner">
-        <a href="#top" className="logo" onClick={() => setOpen(false)}>
-          <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="90" height="42" />
-          <span className="logo-text">Chandra Maju Bersama</span>
-        </a>
-        <nav className={`nav ${open ? 'is-open' : ''}`}>
-          {nav.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
-          ))}
-          <ShopButton variant="small">Belanja</ShopButton>
-        </nav>
         <button className={`menu-toggle ${open ? 'is-open' : ''}`} aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
           <span /><span />
         </button>
+        <nav className={`nav ${open ? 'is-open' : ''}`}>
+          {nav.map((item) => (
+            <a key={item.href} className={headerExtras.includes(item.href) ? 'nav-extra' : undefined} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
+          ))}
+        </nav>
+        <a href="#top" className="logo" onClick={() => setOpen(false)} aria-label="CMB — kembali ke atas">
+          <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="94" height="44" />
+        </a>
+        <div className="header-actions">
+          <a className="icon-btn" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Hubungi via WhatsApp"><Icon name="phone" /></a>
+          <ShopButton variant="small">Belanja</ShopButton>
+        </div>
       </div>
     </header>
   )
@@ -65,37 +83,20 @@ function RotatingWord({ words }) {
 }
 
 export function Hero() {
-  const [shift, setShift] = useState(0)
-
-  useEffect(() => {
-    let frame = 0
-    const onScroll = () => {
-      if (frame) return
-      frame = requestAnimationFrame(() => {
-        frame = 0
-        setShift(Math.min(window.scrollY, 900))
-      })
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
-
   return (
-    <section className="hero" id="top" style={{ '--hy': `${shift}px` }}>
-      <div className="hero-decor" aria-hidden="true">
-        <span className="decor decor-1"><TissueSheet /></span>
-        <span className="decor decor-2"><TissueSheet /></span>
-      </div>
-      <div className="container">
+    <section className="hero" id="top">
+      <div className="container hero-grid">
+        <div className="hero-visual reveal reveal-scale" aria-hidden="true">
+          <img className="hv hv-1" src="/products/trecy-economy.png" alt="" />
+          <img className="hv hv-2" src="/products/trecy-facial-1kg.png" alt="" />
+          <img className="hv hv-3" src="/products/trecy-belah.png" alt="" />
+        </div>
         <div className="hero-copy">
           <h1 className="reveal" style={delay(0)}>{hero.title} <RotatingWord words={hero.accents} /></h1>
           <p className="lead reveal" style={delay(1)}>{hero.lead}</p>
           <div className="actions reveal" style={delay(2)}>
-            <ShopButton />
-            <a className="btn btn-ghost" href="#produk">Lihat produk</a>
+            <ShopButton variant="light" />
+            <a className="btn btn-outline-light" href="#produk">Lihat produk</a>
           </div>
           <ul className="hero-points reveal" style={delay(3)}>
             {hero.points.map((p) => <li key={p}>{p}</li>)}
@@ -108,19 +109,28 @@ export function Hero() {
 
 export function About() {
   return (
-    <section className="section about" id="tentang">
+    <section className="section" id="tentang">
       <div className="container">
-        <div className="two-col about-intro">
-          <div className="reveal">
-            <SectionLabel index="01">Tentang kami</SectionLabel>
-            <h2>{about.title}</h2>
-          </div>
-          <p className="about-lead reveal" style={delay(1)}>{about.lead}</p>
+        <div className="section-head center reveal">
+          <Eyebrow>Tentang kami</Eyebrow>
+          <h2>{about.title}</h2>
+          <p>{about.lead}</p>
         </div>
 
-        <div className="about-story">
+        <div className="about-grid">
+          <div className="prose">
+            {about.story.map((text, i) => (
+              <p key={i} className="reveal" style={delay(i)}>{text}</p>
+            ))}
+            <div className="audiences reveal" style={delay(3)}>
+              <span className="audiences-label">Kami melayani</span>
+              <ul>
+                {about.audiences.map((a) => <li key={a}>{a}</li>)}
+              </ul>
+            </div>
+          </div>
           <aside className="about-card reveal reveal-scale">
-            <img src="/brand/cmb-logo.svg" alt="Logo CMB" width="180" height="84" />
+            <img src="/brand/cmb-logo.svg" alt="Logo CMB" width="140" height="66" />
             <dl>
               <div><dt>Nama perusahaan</dt><dd>{company.name}</dd></div>
               <div><dt>Berdiri</dt><dd>{company.founded}</dd></div>
@@ -128,17 +138,6 @@ export function About() {
               <div><dt>Lokasi</dt><dd>Cipondoh, Kota Tangerang</dd></div>
             </dl>
           </aside>
-          <div className="prose">
-            {about.story.map((text, i) => (
-              <p key={i} className="reveal" style={delay(i + 1)}>{text}</p>
-            ))}
-            <div className="audiences reveal" style={delay(4)}>
-              <span className="audiences-label">Kami melayani</span>
-              <ul>
-                {about.audiences.map((a) => <li key={a}>{a}</li>)}
-              </ul>
-            </div>
-          </div>
         </div>
 
         <div className="vm">
@@ -147,7 +146,7 @@ export function About() {
             <h3>Visi</h3>
             <p>{about.vision}</p>
           </div>
-          <div className="vm-card reveal" style={delay(1)}>
+          <div className="vm-card vm-mission reveal" style={delay(1)}>
             <span className="vm-icon"><Icon name="target" /></span>
             <h3>Misi</h3>
             <ol>
@@ -158,9 +157,8 @@ export function About() {
 
         <div className="values">
           {about.values.map((v, i) => (
-            <div key={v.title} className="value reveal" style={delay(i)}>
-              <span className="value-num">{String(i + 1).padStart(2, '0')}</span>
-              <Icon name={v.icon} />
+            <div key={v.title} className={`value value-${i + 1} reveal`} style={delay(i)}>
+              <span className="value-icon"><Icon name={v.icon} /></span>
               <h3>{v.title}</h3>
               <p>{v.text}</p>
             </div>
@@ -173,10 +171,10 @@ export function About() {
 
 export function Features() {
   return (
-    <section className="section section-alt" id="keunggulan">
+    <section className="section tint-cream" id="keunggulan">
       <div className="container">
-        <div className="section-head reveal">
-          <SectionLabel index="02">Keunggulan</SectionLabel>
+        <div className="section-head center reveal">
+          <Eyebrow>Keunggulan</Eyebrow>
           <h2>{featuresIntro.title}</h2>
           <p>{featuresIntro.text}</p>
         </div>
@@ -253,18 +251,20 @@ export function Products() {
   return (
     <section className="section" id="produk">
       <div className="container">
-        <div className="section-head split-head reveal">
-          <div>
-            <SectionLabel index="03">Produk</SectionLabel>
-            <h2>{productsIntro.title}</h2>
-            <p>{productsIntro.text}</p>
-          </div>
-          <a className="text-link" href={company.shopee} target="_blank" rel="noreferrer">Lihat katalog lengkap →</a>
+        <div className="section-head center reveal">
+          <Eyebrow>Produk</Eyebrow>
+          <h2>{productsIntro.title}</h2>
+          <p>{productsIntro.text}</p>
         </div>
-        <ProductSlider items={showcase} />
+        <div className="slider-panel">
+          <ProductSlider items={showcase} />
+        </div>
         <div className="products-note reveal">
           <p><strong>Tidak menemukan produk yang Anda cari?</strong> Kami juga menerima permintaan khusus untuk kebutuhan usaha.</p>
-          <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan via WhatsApp</a>
+          <div className="actions">
+            <a className="btn btn-primary" href={company.shopee} target="_blank" rel="noreferrer">Lihat katalog lengkap</a>
+            <a className="btn btn-ghost" href={whatsapp} target="_blank" rel="noreferrer">Tanya via WhatsApp</a>
+          </div>
         </div>
       </div>
     </section>
@@ -320,26 +320,26 @@ export function Brands() {
   return (
     <section className="section brands-section" id="brand">
       <div className="container">
-        <div className="section-head reveal">
-          <SectionLabel index="04">Brand</SectionLabel>
+        <div className="section-head center reveal">
+          <Eyebrow>Brand</Eyebrow>
           <h2>{brandsIntro.title}</h2>
           <p>{brandsIntro.text}</p>
         </div>
-        <div className="brands-marquee">
-          <div className="brands-track" ref={trackRef}>
-            {[...brands, ...brands].map((b, i) => (
-              <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
-                {b.logo
-                  ? <img className={b.mono ? 'is-mono' : b.light ? 'is-light' : undefined} src={b.logo} alt={b.name} />
-                  : <span className="brand-name">{b.name}</span>}
-              </div>
-            ))}
-          </div>
+      </div>
+      <div className="brands-marquee">
+        <div className="brands-track" ref={trackRef}>
+          {[...brands, ...brands].map((b, i) => (
+            <div key={i} className="brand" aria-hidden={i >= brands.length || undefined}>
+              {b.logo
+                ? <img className={b.mono ? 'is-mono' : b.light ? 'is-light' : undefined} src={b.logo} alt={b.name} />
+                : <span className="brand-name">{b.name}</span>}
+            </div>
+          ))}
         </div>
-        <div className="brands-foot reveal">
-          <p>Mencari merek lain? <a className="text-link" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
-          <small>Nama dan logo merek adalah milik pemiliknya masing-masing.</small>
-        </div>
+      </div>
+      <div className="container brands-foot reveal">
+        <p>Mencari merek lain? <a className="text-link" href={whatsapp} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
+        <small>Nama dan logo merek adalah milik pemiliknya masing-masing.</small>
       </div>
     </section>
   )
@@ -347,10 +347,10 @@ export function Brands() {
 
 export function HowToOrder() {
   return (
-    <section className="section section-alt" id="cara-belanja">
+    <section className="section tint-blush" id="cara-belanja">
       <div className="container">
-        <div className="section-head reveal">
-          <SectionLabel index="05">Cara belanja</SectionLabel>
+        <div className="section-head center reveal">
+          <Eyebrow>Cara belanja</Eyebrow>
           <h2>{orderIntro.title}</h2>
           <p>{orderIntro.text}</p>
         </div>
@@ -377,8 +377,8 @@ export function HowToOrder() {
                 ))}
               </ol>
               {c.key === 'online'
-                ? <ShopButton />
-                : <a className="btn btn-ghost" href={company.directions} target="_blank" rel="noreferrer"><Icon name="pin" /> Petunjuk arah ke toko</a>}
+                ? <ShopButton variant="light" />
+                : <a className="btn btn-primary" href={company.directions} target="_blank" rel="noreferrer"><Icon name="pin" /> Petunjuk arah ke toko</a>}
             </div>
           ))}
         </div>
@@ -391,9 +391,9 @@ export function Location() {
   const embed = `https://www.google.com/maps?q=${encodeURIComponent(company.mapsQuery)}&z=17&output=embed`
   return (
     <section className="section" id="lokasi">
-      <div className="container two-col">
-        <div className="reveal">
-          <SectionLabel index="06">Lokasi</SectionLabel>
+      <div className="container location">
+        <div className="location-info reveal">
+          <Eyebrow>Lokasi</Eyebrow>
           <h2>{locationIntro.title}</h2>
           <p className="section-text">{locationIntro.text}</p>
           <dl className="info">
@@ -417,13 +417,13 @@ export function Location() {
 
 export function Faq() {
   return (
-    <section className="section section-alt" id="faq">
-      <div className="container two-col faq">
-        <div className="reveal faq-head">
-          <SectionLabel index="07">FAQ</SectionLabel>
+    <section className="section tint-cream" id="faq">
+      <div className="container faq">
+        <div className="faq-head reveal">
+          <Eyebrow>FAQ</Eyebrow>
           <h2>{faqIntro.title}</h2>
           <p className="section-text">{faqIntro.text}</p>
-          <a className="btn btn-ghost" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer"><Icon name="phone" /> Tanya via WhatsApp</a>
+          <a className="btn btn-primary" href={whatsapp} target="_blank" rel="noreferrer"><Icon name="phone" /> Tanya via WhatsApp</a>
         </div>
         <div className="faq-list">
           {faqs.map((f, i) => (
@@ -443,15 +443,13 @@ export function CallToAction() {
     <section className="cta-wrap">
       <div className="container">
         <div className="cta reveal reveal-scale">
-          <div>
-            <h2>{cta.title}</h2>
-            <p>{cta.text}</p>
-            <ul className="cta-perks">
-              {cta.perks.map((p) => <li key={p}>{p}</li>)}
-            </ul>
-          </div>
+          <h2>{cta.title}</h2>
+          <p>{cta.text}</p>
+          <ul className="cta-perks">
+            {cta.perks.map((p) => <li key={p}>{p}</li>)}
+          </ul>
           <div className="actions">
-            <a className="btn btn-light" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noreferrer">
+            <a className="btn btn-light" href={whatsapp} target="_blank" rel="noreferrer">
               <Icon name="phone" /> Hubungi via WhatsApp
             </a>
             <ShopButton variant="outline-light" />
@@ -468,8 +466,7 @@ export function Footer() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <a href="#top" className="logo">
-            <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="90" height="42" />
-            <span className="logo-text">Chandra Maju Bersama</span>
+            <img className="logo-mark" src="/brand/cmb-logo.svg" alt="CMB" width="94" height="44" />
           </a>
           <p>{footer.blurb}</p>
         </div>
