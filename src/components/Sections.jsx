@@ -88,7 +88,8 @@ function CategoryTile({ cat, active, onSelect, hidden }) {
       aria-hidden={hidden || undefined} tabIndex={hidden ? -1 : undefined}>
       {cat.wordmark
         ? <TrecyLogo />
-        : <img className={cat.mono ? 'is-mono' : cat.light ? 'is-light' : undefined} src={cat.logo} alt={cat.name} />}
+        : <img className={cat.mono ? 'is-mono' : undefined} src={cat.logo} alt={cat.name} />}
+      <span className="brand-name">{cat.name}</span>
     </button>
   )
 }
@@ -125,9 +126,14 @@ export function Catalog({ query, setQuery }) {
             <h1>{catalogIntro.title}</h1>
             <p>{catalogIntro.text}</p>
           </div>
+          <div className="cat-panel">
           <div className="cat-head">
-            <h2>Kategori merek</h2>
-            <p>Pilih merek tissue untuk melihat produknya.</p>
+            <div>
+              <span className="eyebrow">Merek pilihan</span>
+              <h2>Kategori merek</h2>
+              <p>Pilih merek tissue untuk melihat produknya.</p>
+            </div>
+            <span className="cat-total"><b>{categories.length}</b> merek tersedia</span>
           </div>
           {/* slideshow berjalan: daftar merek digandakan agar putarannya menyambung tanpa jeda */}
           <div className="cat-marquee">
@@ -144,6 +150,7 @@ export function Catalog({ query, setQuery }) {
           <div className="cat-foot">
             <p>Mencari merek lain? <a href={askPrice('tissue merek lain')} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
             <small>Nama dan logo merek adalah milik pemiliknya masing-masing.</small>
+          </div>
           </div>
         </div>
       </section>
