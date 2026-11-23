@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {
   company, nav, topbar, about, featuresIntro, features, catalogIntro, products, brands,
-  orderIntro, channels, locationIntro, faqIntro, faqs, cta, footer,
+  locationIntro, faqIntro, faqs, footer,
 } from '../data/content'
-import { Icon, AugustStoreLogo, TrecyLogo } from './Art'
+import { Icon, TrecyLogo } from './Art'
 
 const whatsapp = `https://wa.me/${company.whatsapp}`
 const askPrice = (name) => `${whatsapp}?text=${encodeURIComponent(`Halo CMB, saya ingin menanyakan harga ${name}.`)}`
@@ -175,47 +175,6 @@ export function Catalog({ query, setQuery }) {
   )
 }
 
-export function HowToOrder() {
-  return (
-    <section className="section tint" id="cara-belanja">
-      <div className="container">
-        <div className="section-head reveal">
-          <h2>{orderIntro.title}</h2>
-          <p>{orderIntro.text}</p>
-        </div>
-        <div className="channels">
-          {channels.map((c, i) => (
-            <div key={c.key} className={`channel channel-${c.key} reveal`} style={delay(i)}>
-              <div className="channel-head">
-                <span className="channel-icon"><Icon name={c.icon} /></span>
-                <span className="channel-badge">{c.badge}</span>
-              </div>
-              <h3>{c.title}</h3>
-              {c.key === 'online' && (
-                <a className="store-tag" href={company.shopee} target="_blank" rel="noreferrer">
-                  <AugustStoreLogo />
-                  <span>Toko resmi kami di Shopee</span>
-                </a>
-              )}
-              <ol className="channel-steps">
-                {c.steps.map((s) => (
-                  <li key={s.title}>
-                    <strong>{s.title}</strong>
-                    <span>{s.text}</span>
-                  </li>
-                ))}
-              </ol>
-              {c.key === 'online'
-                ? <ShopButton />
-                : <a className="btn btn-outline" href={company.directions} target="_blank" rel="noreferrer"><Icon name="pin" /> Petunjuk arah ke toko</a>}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export function Features() {
   return (
     <section className="section" id="keunggulan">
@@ -270,31 +229,6 @@ export function About() {
             </dl>
           </aside>
         </div>
-
-        <div className="vm">
-          <div className="vm-card vm-vision reveal">
-            <span className="vm-icon"><Icon name="eye" /></span>
-            <h3>Visi</h3>
-            <p>{about.vision}</p>
-          </div>
-          <div className="vm-card reveal" style={delay(1)}>
-            <span className="vm-icon"><Icon name="target" /></span>
-            <h3>Misi</h3>
-            <ol>
-              {about.mission.map((m) => <li key={m}>{m}</li>)}
-            </ol>
-          </div>
-        </div>
-
-        <div className="values">
-          {about.values.map((v, i) => (
-            <div key={v.title} className="value reveal" style={delay(i)}>
-              <span className="value-icon"><Icon name={v.icon} /></span>
-              <h3>{v.title}</h3>
-              <p>{v.text}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )
@@ -345,28 +279,6 @@ export function Faq() {
               <p>{f.a}</p>
             </details>
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-export function CallToAction() {
-  return (
-    <section className="cta-wrap">
-      <div className="container">
-        <div className="cta reveal">
-          <div>
-            <h2>{cta.title}</h2>
-            <p>{cta.text}</p>
-            <ul className="cta-perks">
-              {cta.perks.map((p) => <li key={p}>{p}</li>)}
-            </ul>
-          </div>
-          <div className="actions">
-            <a className="btn btn-light" href={whatsapp} target="_blank" rel="noreferrer"><Icon name="phone" /> Hubungi via WhatsApp</a>
-            <ShopButton variant="outline-light" />
-          </div>
         </div>
       </div>
     </section>

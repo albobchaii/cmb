@@ -20,7 +20,6 @@ export const company = {
 
 export const nav = [
   { label: 'Katalog', href: '#katalog' },
-  { label: 'Cara Belanja', href: '#cara-belanja' },
   { label: 'Keunggulan', href: '#keunggulan' },
   { label: 'Tentang', href: '#tentang' },
   { label: 'Lokasi', href: '#lokasi' },

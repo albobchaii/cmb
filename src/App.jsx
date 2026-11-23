@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TopBar, Header, Catalog, HowToOrder, Features, About, Location, Faq, CallToAction, Footer } from './components/Sections'
+import { TopBar, Header, Catalog, Features, About, Location, Faq, Footer } from './components/Sections'
 import useReveal from './useReveal'
 
 export default function App() {
@@ -13,12 +13,10 @@ export default function App() {
       <Header query={query} setQuery={setQuery} />
       <main id="top">
         <Catalog query={query} setQuery={setQuery} />
-        <HowToOrder />
         <Features />
         <About />
         <Location />
         <Faq />
-        <CallToAction />
       </main>
       <Footer />
     </>
