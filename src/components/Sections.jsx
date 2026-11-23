@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   company, nav, topbar, about, featuresIntro, features, catalogIntro, products, brands,
   locationIntro, faqIntro, faqs, footer,
@@ -81,11 +81,10 @@ const categories = [
   ...brands,
 ]
 
-function CategoryTile({ cat, active, onSelect, hidden }) {
+function CategoryTile({ cat, active, onSelect }) {
   return (
     <button className={`brand ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}
-      aria-label={`Lihat produk ${cat.name}`} title={cat.name}
-      aria-hidden={hidden || undefined} tabIndex={hidden ? -1 : undefined}>
+      aria-label={`Lihat produk ${cat.name}`} title={cat.name}>
       {cat.wordmark
         ? <TrecyLogo />
         : <img className={cat.mono ? 'is-mono' : undefined} src={cat.logo} alt={cat.name} />}
@@ -110,6 +109,12 @@ function ProductCard({ item, index }) {
 
 export function Catalog({ query, setQuery }) {
   const [brand, setBrand] = useState(null)
+  const rowRef = useRef(null)
+  // tombol ‹ › menggeser deretan merek sejauh ±60% lebar tampilan
+  const nudge = (dir) => {
+    const row = rowRef.current
+    if (row) row.scrollBy({ left: dir * row.clientWidth * 0.6, behavior: 'smooth' })
+  }
   const q = query.trim().toLowerCase()
   const items = products.filter((p) =>
     (!brand || p.brand === brand) && (!q || `${p.brand} ${p.name}`.toLowerCase().includes(q)))
@@ -135,17 +140,20 @@ export function Catalog({ query, setQuery }) {
             </div>
             <span className="cat-total"><b>{categories.length}</b> merek tersedia</span>
           </div>
-          {/* slideshow berjalan: daftar merek digandakan agar putarannya menyambung tanpa jeda */}
-          <div className="cat-marquee">
-            <div className="cat-track">
-              {[false, true].map((copy) => (
-                <div className="cat-set" key={String(copy)}>
-                  {categories.map((c) => (
-                    <CategoryTile key={c.name} cat={c} hidden={copy} active={brand === c.name} onSelect={() => pick(c.name)} />
-                  ))}
-                </div>
+          <div className="cat-slider">
+          <button type="button" className="cat-arrow is-prev" aria-label="Merek sebelumnya" onClick={() => nudge(-1)}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+          </button>
+          <div className="cat-marquee" ref={rowRef}>
+            <div className="cat-set">
+              {categories.map((c) => (
+                <CategoryTile key={c.name} cat={c} active={brand === c.name} onSelect={() => pick(c.name)} />
               ))}
             </div>
+          </div>
+          <button type="button" className="cat-arrow is-next" aria-label="Merek berikutnya" onClick={() => nudge(1)}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </button>
           </div>
           <div className="cat-foot">
             <p>Mencari merek lain? <a href={askPrice('tissue merek lain')} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
