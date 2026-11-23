@@ -84,25 +84,22 @@ p { margin: 0; }
 .cat-head h2 { font-size: 1.5rem; }
 .cat-head p { color: var(--muted); flex: 1; }
 .cat-marquee { position: relative; overflow: hidden; padding: 2px 0 6px; }
-.cat-marquee::before, .cat-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 64px; z-index: 1; pointer-events: none; }
+.cat-marquee::before, .cat-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 1; pointer-events: none; }
 .cat-marquee::before { left: 0; background: linear-gradient(90deg, #fff, rgba(255,255,255,0)); }
 .cat-marquee::after { right: 0; background: linear-gradient(270deg, #fff, rgba(255,255,255,0)); }
 .cat-track { display: flex; width: max-content; animation: cat-run 50s linear infinite; }
 .cat-marquee:hover .cat-track, .cat-marquee:focus-within .cat-track { animation-play-state: paused; }
-.cat-set { display: flex; gap: 16px; padding-right: 16px; }
-.cat-set .cat { flex: 0 0 176px; }
-@keyframes cat-run { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
-.cat { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0 0 16px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; color: var(--ink); cursor: pointer; overflow: hidden; text-align: center; transition: border-color .2s, box-shadow .2s; }
-.cat:hover { border-color: var(--ink); }
-.cat.is-active { border-color: var(--maroon); box-shadow: 0 0 0 2px var(--maroon); }
-.cat-logo { position: relative; width: 100%; aspect-ratio: 4 / 3; margin-bottom: 12px; background: var(--peach); }
-.cat-logo img, .cat-logo svg { position: absolute; left: 16%; top: 20%; width: 68%; height: 60%; object-fit: contain; transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
-.cat:hover .cat-logo img, .cat:hover .cat-logo svg { transform: scale(1.06); }
-.cat-logo img.is-mono { filter: brightness(0); opacity: 0.85; }
-/* logo yang sangat terang dipertegas agar terbaca di latar peach */
-.cat-logo img.is-light { filter: brightness(0.62) saturate(1.8); }
-.cat-name { font-weight: 500; font-size: 0.98rem; }
-.cat-count { font-size: 0.8rem; color: var(--muted); }
+.cat-set { display: flex; }
+.cat-set { gap: 64px; padding-right: 64px; align-items: center; }
+.brand { flex: 0 0 auto; display: grid; place-items: center; width: 190px; height: 110px; padding: 0; border: 0; background: none; cursor: pointer; position: relative; }
+.brand img, .brand svg { width: 100%; height: 76px; object-fit: contain; transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
+.brand:hover img, .brand:hover svg { transform: scale(1.08); }
+.brand::after { content: ''; position: absolute; left: 30%; right: 30%; bottom: 0; height: 3px; border-radius: 3px; background: var(--maroon); transform: scaleX(0); transition: transform .25s; }
+.brand.is-active::after { transform: scaleX(1); }
+.brand img.is-mono { filter: brightness(0); opacity: 0.85; }
+.cat-foot { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-top: 28px; color: var(--muted); }
+.cat-foot a { color: var(--maroon); font-weight: 500; border-bottom: 1.5px solid currentColor; padding-bottom: 2px; }
+.cat-foot small { font-size: 0.78rem; }
 
 /* Katalog */
 .catalog { padding: 56px 0 clamp(72px, 9vw, 112px); }
@@ -279,11 +276,11 @@ p { margin: 0; }
   .cat-head p { flex-basis: 100%; }
   .cat-head h2, .toolbar h2 { font-size: 1.25rem; }
   .cat-marquee { margin-inline: -16px; }
-  .cat-marquee::before, .cat-marquee::after { width: 32px; }
-  .cat-set { gap: 10px; padding-right: 10px; }
-  .cat-set .cat { flex-basis: 124px; padding-bottom: 12px; }
+  .cat-set { gap: 36px; padding-right: 36px; }
+  .brand { width: 120px; height: 80px; }
+  .brand img, .brand svg { height: 52px; }
+  .cat-marquee::before, .cat-marquee::after { width: 40px; }
   .cat-track { animation-duration: 40s; }
-  .cat-name { font-size: 0.9rem; }
   .catalog { padding-top: 36px; }
   .toolbar { padding-top: 28px; }
   .chip { height: 40px; padding: 0 14px; font-size: 0.9rem; }

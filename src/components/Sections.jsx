@@ -80,20 +80,15 @@ const categories = [
   { name: 'Trecy', wordmark: true },
   ...brands,
 ]
-const countOf = (brand) => products.filter((p) => p.brand === brand).length
 
 function CategoryTile({ cat, active, onSelect, hidden }) {
-  const n = countOf(cat.name)
   return (
-    <button className={`cat ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}
+    <button className={`brand ${active ? 'is-active' : ''}`} onClick={onSelect} aria-pressed={active}
+      aria-label={`Lihat produk ${cat.name}`} title={cat.name}
       aria-hidden={hidden || undefined} tabIndex={hidden ? -1 : undefined}>
-      <span className="cat-logo">
-        {cat.wordmark
-          ? <TrecyLogo />
-          : <img className={cat.mono ? 'is-mono' : cat.light ? 'is-light' : undefined} src={cat.logo} alt="" loading="lazy" />}
-      </span>
-      <span className="cat-name">{cat.name}</span>
-      <span className="cat-count">{n ? `${n} produk` : 'Tanya stok'}</span>
+      {cat.wordmark
+        ? <TrecyLogo />
+        : <img className={cat.mono ? 'is-mono' : cat.light ? 'is-light' : undefined} src={cat.logo} alt={cat.name} />}
     </button>
   )
 }
@@ -145,6 +140,10 @@ export function Catalog({ query, setQuery }) {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="cat-foot">
+            <p>Mencari merek lain? <a href={askPrice('tissue merek lain')} target="_blank" rel="noreferrer">Tanyakan stok via WhatsApp</a></p>
+            <small>Nama dan logo merek adalah milik pemiliknya masing-masing.</small>
           </div>
         </div>
       </section>
