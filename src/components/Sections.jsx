@@ -3,7 +3,7 @@ import {
   company, nav, topbar, about, featuresIntro, features, catalogIntro, products, brands,
   locationIntro, faqIntro, faqs, footer,
 } from '../data/content'
-import { Icon, TrecyLogo } from './Art'
+import { Icon, AugustStoreLogo, TrecyLogo } from './Art'
 
 const whatsapp = `https://wa.me/${company.whatsapp}`
 const askPrice = (name) => `${whatsapp}?text=${encodeURIComponent(`Halo CMB, saya ingin menanyakan harga ${name}.`)}`
